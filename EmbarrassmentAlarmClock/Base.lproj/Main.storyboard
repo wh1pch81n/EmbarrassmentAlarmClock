@@ -1,25 +1,209 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="EmbarrassmentAlarmClock" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="268" y="-639"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="PxH-bM-Z8C">
+            <objects>
+                <viewController storyboardIdentifier="EACLoginViewController" id="qXn-Nh-1Ra" customClass="EACLoginViewController" customModule="EmbarrassmentAlarmClock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6ua-0r-yFb"/>
+                        <viewControllerLayoutGuide type="bottom" id="ov0-oh-abO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HwK-xE-xgd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vC-rM-W6h">
+                                <rect key="frame" x="16" y="80" width="288" height="122"/>
+                                <string key="text">WTFU will post to Facebook on your behalf.  When prompted, please tap "Okay" to give us permission.
+
+Otherwise it is just another stupid alarm clock app, stupid</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="roX-dv-mTU">
+                                <rect key="frame" x="36" y="222" width="248" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="qAt-1H-4XM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="3vC-rM-W6h" firstAttribute="top" secondItem="6ua-0r-yFb" secondAttribute="bottom" constant="60" id="6xS-QT-efs"/>
+                            <constraint firstItem="3vC-rM-W6h" firstAttribute="leading" secondItem="HwK-xE-xgd" secondAttribute="leadingMargin" id="7YT-je-w38"/>
+                            <constraint firstItem="roX-dv-mTU" firstAttribute="top" secondItem="3vC-rM-W6h" secondAttribute="bottom" constant="20" id="97F-EB-EHR"/>
+                            <constraint firstItem="roX-dv-mTU" firstAttribute="leading" secondItem="HwK-xE-xgd" secondAttribute="leadingMargin" constant="20" id="C63-Dm-nPu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3vC-rM-W6h" secondAttribute="trailing" id="OXP-f4-aq7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="roX-dv-mTU" secondAttribute="trailing" constant="20" id="fdN-dL-UFh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="viewFBButton" destination="roX-dv-mTU" id="e3i-Vw-bfv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="liH-W2-kk2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="655" y="-1029"/>
+        </scene>
+        <!--Start Alarm View Controller-->
+        <scene sceneID="imh-rD-ET1">
+            <objects>
+                <viewController storyboardIdentifier="EACStartAlarmViewController" id="oY9-AF-gbz" customClass="EACStartAlarmViewController" customModule="EmbarrassmentAlarmClock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OVU-IZ-k5K"/>
+                        <viewControllerLayoutGuide type="bottom" id="wQd-sg-pKE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jjh-zE-9iM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wI-j9-wJ8">
+                                <rect key="frame" x="16" y="219" width="288" height="130"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="WAKE THE FUCK UP">
+                                        <attributes>
+                                            <color key="NSColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="30" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+
+The alarm clock that lets your friends know you're a moron.</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEg-Wk-TfE">
+                                <rect key="frame" x="110" y="410" width="100" height="88"/>
+                                <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="LWo-iS-8vd"/>
+                                    <constraint firstAttribute="width" secondItem="sEg-Wk-TfE" secondAttribute="height" multiplier="17:15" id="zn1-lS-SEY"/>
+                                </constraints>
+                                <state key="normal" title="Start">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sEg-Wk-TfE" firstAttribute="centerX" secondItem="jjh-zE-9iM" secondAttribute="centerX" id="AAh-sC-Wi0"/>
+                            <constraint firstItem="9wI-j9-wJ8" firstAttribute="centerY" secondItem="jjh-zE-9iM" secondAttribute="centerY" id="FXX-SO-jDq"/>
+                            <constraint firstItem="wQd-sg-pKE" firstAttribute="top" secondItem="sEg-Wk-TfE" secondAttribute="bottom" constant="70" id="OIh-zw-tVC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9wI-j9-wJ8" secondAttribute="trailing" id="Tuj-tZ-znM"/>
+                            <constraint firstItem="9wI-j9-wJ8" firstAttribute="leading" secondItem="jjh-zE-9iM" secondAttribute="leadingMargin" id="ZlP-eL-nzV"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GLL-0R-JTX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="655" y="-359"/>
+        </scene>
+        <!--Set Alarm View Controller-->
+        <scene sceneID="0O1-NR-LHG">
+            <objects>
+                <viewController storyboardIdentifier="EACSetAlarmViewController" id="aHL-LL-HP7" customClass="EACSetAlarmViewController" customModule="EmbarrassmentAlarmClock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LFF-eB-iL4"/>
+                        <viewControllerLayoutGuide type="bottom" id="VI8-Ww-9DG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AXu-7t-dYx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TJQ-LT-8pN">
+                                <rect key="frame" x="0.0" y="94" width="320" height="308"/>
+                                <date key="date" timeIntervalSinceReferenceDate="479532572.65056902">
+                                    <!--2016-03-13 03:29:32 +0000-->
+                                </date>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SET ALARM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biI-m7-XDb">
+                                <rect key="frame" x="16" y="65" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QS-Mk-Zzs">
+                                <rect key="frame" x="110" y="410" width="100" height="88"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="BuX-bb-adP"/>
+                                    <constraint firstAttribute="width" secondItem="8QS-Mk-Zzs" secondAttribute="height" multiplier="17:15" id="Ftb-LO-6HW"/>
+                                </constraints>
+                                <state key="normal" title="Set">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="8QS-Mk-Zzs" firstAttribute="width" secondItem="8QS-Mk-Zzs" secondAttribute="height" multiplier="17:15" id="4iJ-cc-KED"/>
+                            <constraint firstAttribute="trailing" secondItem="TJQ-LT-8pN" secondAttribute="trailing" id="Bjx-Wl-V2K"/>
+                            <constraint firstItem="8QS-Mk-Zzs" firstAttribute="centerX" secondItem="AXu-7t-dYx" secondAttribute="centerX" id="EbZ-A3-Hfc"/>
+                            <constraint firstItem="8QS-Mk-Zzs" firstAttribute="top" secondItem="TJQ-LT-8pN" secondAttribute="bottom" constant="8" id="InG-dQ-SBQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="biI-m7-XDb" secondAttribute="trailing" id="J0K-te-Xg5"/>
+                            <constraint firstItem="VI8-Ww-9DG" firstAttribute="top" secondItem="8QS-Mk-Zzs" secondAttribute="bottom" constant="70" id="Yn2-jR-ynD"/>
+                            <constraint firstItem="TJQ-LT-8pN" firstAttribute="top" secondItem="biI-m7-XDb" secondAttribute="bottom" constant="8" id="a48-v9-tJQ"/>
+                            <constraint firstItem="biI-m7-XDb" firstAttribute="leading" secondItem="AXu-7t-dYx" secondAttribute="leadingMargin" id="cn4-VT-9z7"/>
+                            <constraint firstItem="TJQ-LT-8pN" firstAttribute="leading" secondItem="AXu-7t-dYx" secondAttribute="leading" id="rRh-Pf-kGE"/>
+                            <constraint firstItem="biI-m7-XDb" firstAttribute="top" secondItem="LFF-eB-iL4" secondAttribute="bottom" constant="45" id="xhd-EI-aBy"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KPK-Ro-YgT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="993" y="-359"/>
+        </scene>
+        <!--Active Alarm View Controller-->
+        <scene sceneID="6SZ-2r-7UT">
+            <objects>
+                <viewController storyboardIdentifier="EACActiveAlarmViewController" id="DaS-vM-CTh" customClass="EACActiveAlarmViewController" customModule="EmbarrassmentAlarmClock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DEm-XO-sKA"/>
+                        <viewControllerLayoutGuide type="bottom" id="cjA-3s-ZBw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="act-aX-ske">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TCL-ry-fsV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1340" y="-359"/>
         </scene>
     </scenes>
 </document>

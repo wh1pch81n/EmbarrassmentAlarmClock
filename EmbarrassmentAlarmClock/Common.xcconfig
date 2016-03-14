@@ -1,0 +1,18 @@
+//
+//  Config.xcconfig
+//  EmbarrassmentAlarmClock
+//
+//  Created by Derrick  Ho on 3/12/16.
+//  Copyright © 2016 Derrick  Ho. All rights reserved.
+//
+
+FB_PUBLISH_ACTIONS="publish_actions"
+FB_GRAPHPATH_FEED="me/feed"
+FB_GRAPHPATH_FEED_MESSAGE_KEY="message"
+
+POST="POST"
+
+GCC_PREPROCESSOR_DEFINITIONS=$(inherited) $(FB_CONSTANTS) $(COMMON_CONSTANTS)
+
+FB_CONSTANTS= FB_PUBLISH_ACTIONS="$(FB_PUBLISH_ACTIONS)" FB_GRAPHPATH_FEED="$(FB_GRAPHPATH_FEED)" FB_GRAPHPATH_FEED_MESSAGE_KEY="$(FB_GRAPHPATH_FEED_MESSAGE_KEY)"
+COMMON_CONSTANTS= POST="$(POST)"
