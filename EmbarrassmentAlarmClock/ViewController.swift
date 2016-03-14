@@ -113,10 +113,39 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
 class EACStartAlarmViewController: UIViewController {
 	
+	@IBOutlet weak var startButton: UIButton!
+	
+	override func loadView() {
+		super.loadView()
+		let circle = UIBezierPath(ovalInRect: startButton.bounds)
+		let maskShape = CAShapeLayer()
+		maskShape.path = circle.CGPath
+		startButton.layer.mask = maskShape
+	}
+	
+	@IBAction func tappedStartButton(sender: AnyObject) {
+		let destinationViewController = storyboard!.instantiateViewControllerWithIdentifier(typeAsString(EACSetAlarmViewController))
+		destinationViewController.transitioningDelegate = EACCircleAnimatorManager.sharedInstance
+		presentViewController(destinationViewController, animated: true, completion: nil)
+	}
+	
 }
 
 class EACSetAlarmViewController: UIViewController {
+	@IBOutlet weak var alarmTimeButton: UIButton!
+	@IBOutlet weak var datePicker: UIDatePicker!
 	
+	override func loadView() {
+		super.loadView()
+		let circle = UIBezierPath(ovalInRect: alarmTimeButton.bounds)
+		let maskShape = CAShapeLayer()
+		maskShape.path = circle.CGPath
+		alarmTimeButton.layer.mask = maskShape
+	}
+	
+	@IBAction func tappedAlarmTimeButton(sender: AnyObject) {
+		
+	}
 }
 
 class EACActiveAlarmViewController: UIViewController {
@@ -130,11 +159,20 @@ class EACCircleAnimatorManager: NSObject, UIViewControllerTransitioningDelegate 
 	func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		let animator = EACCircleAnimator(isPresenting: true)
 		
-		if let _ = presenting as? ViewController, let _ = presented as? EACLoginViewController {
+		if let _ = presenting as? ViewController,
+			let _ = presented as? EACLoginViewController
+		{
 			animator.centerPoint = presenting.view.center
-		} else if let _ = presenting as? ViewController, let _ = presented as? EACStartAlarmViewController {
+		} else if let _ = presenting as? ViewController,
+			let _ = presented as? EACStartAlarmViewController
+		{
 			animator.centerPoint = presenting.view.center
-		} else {
+		} else if let _presenting = presenting as? EACStartAlarmViewController,
+			let _ = presented as? EACSetAlarmViewController
+		{
+			animator.centerPoint = _presenting.startButton.center
+		}
+		else {
 			return nil
 		}
 		return animator
@@ -145,7 +183,10 @@ class EACCircleAnimatorManager: NSObject, UIViewControllerTransitioningDelegate 
 
 		if let _dismissed = dismissed as? EACLoginViewController {
 			animator.centerPoint = _dismissed.viewFBButton.center
-		} else {
+		} else if let _dismissed = dismissed as? EACStartAlarmViewController {
+			animator.centerPoint = _dismissed.startButton.center
+		}
+		else {
 			return nil
 		}
 		return animator

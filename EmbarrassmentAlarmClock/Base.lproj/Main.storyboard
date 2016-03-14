@@ -107,15 +107,18 @@ The alarm clock that lets your friends know you're a moron.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEg-Wk-TfE">
-                                <rect key="frame" x="110" y="410" width="100" height="88"/>
+                                <rect key="frame" x="110" y="398" width="100" height="100"/>
                                 <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="LWo-iS-8vd"/>
-                                    <constraint firstAttribute="width" secondItem="sEg-Wk-TfE" secondAttribute="height" multiplier="17:15" id="zn1-lS-SEY"/>
+                                    <constraint firstAttribute="width" secondItem="sEg-Wk-TfE" secondAttribute="height" multiplier="1:1" id="zn1-lS-SEY"/>
                                 </constraints>
                                 <state key="normal" title="Start">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="tappedStartButton:" destination="oY9-AF-gbz" eventType="touchUpInside" id="fRp-IE-GIi"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -127,6 +130,9 @@ The alarm clock that lets your friends know you're a moron.</string>
                             <constraint firstItem="9wI-j9-wJ8" firstAttribute="leading" secondItem="jjh-zE-9iM" secondAttribute="leadingMargin" id="ZlP-eL-nzV"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="startButton" destination="sEg-Wk-TfE" id="ntF-Nc-yV4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLL-0R-JTX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -145,7 +151,7 @@ The alarm clock that lets your friends know you're a moron.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TJQ-LT-8pN">
-                                <rect key="frame" x="0.0" y="94" width="320" height="308"/>
+                                <rect key="frame" x="0.0" y="94" width="320" height="296"/>
                                 <date key="date" timeIntervalSinceReferenceDate="479532572.65056902">
                                     <!--2016-03-13 03:29:32 +0000-->
                                 </date>
@@ -157,20 +163,22 @@ The alarm clock that lets your friends know you're a moron.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QS-Mk-Zzs">
-                                <rect key="frame" x="110" y="410" width="100" height="88"/>
+                                <rect key="frame" x="110" y="398" width="100" height="100"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="BuX-bb-adP"/>
-                                    <constraint firstAttribute="width" secondItem="8QS-Mk-Zzs" secondAttribute="height" multiplier="17:15" id="Ftb-LO-6HW"/>
+                                    <constraint firstAttribute="width" secondItem="8QS-Mk-Zzs" secondAttribute="height" multiplier="1:1" id="Ftb-LO-6HW"/>
                                 </constraints>
                                 <state key="normal" title="Set">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="tappedAlarmTimeButton:" destination="aHL-LL-HP7" eventType="touchUpInside" id="4pA-nZ-xWJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="8QS-Mk-Zzs" firstAttribute="width" secondItem="8QS-Mk-Zzs" secondAttribute="height" multiplier="17:15" id="4iJ-cc-KED"/>
                             <constraint firstAttribute="trailing" secondItem="TJQ-LT-8pN" secondAttribute="trailing" id="Bjx-Wl-V2K"/>
                             <constraint firstItem="8QS-Mk-Zzs" firstAttribute="centerX" secondItem="AXu-7t-dYx" secondAttribute="centerX" id="EbZ-A3-Hfc"/>
                             <constraint firstItem="8QS-Mk-Zzs" firstAttribute="top" secondItem="TJQ-LT-8pN" secondAttribute="bottom" constant="8" id="InG-dQ-SBQ"/>
@@ -182,6 +190,10 @@ The alarm clock that lets your friends know you're a moron.</string>
                             <constraint firstItem="biI-m7-XDb" firstAttribute="top" secondItem="LFF-eB-iL4" secondAttribute="bottom" constant="45" id="xhd-EI-aBy"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="alarmTimeButton" destination="8QS-Mk-Zzs" id="fkN-nf-Gy3"/>
+                        <outlet property="datePicker" destination="TJQ-LT-8pN" id="Bi4-iH-NgF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KPK-Ro-YgT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
