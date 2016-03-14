@@ -68,6 +68,10 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 	
 	@IBOutlet weak var viewFBButton: UIView!
 	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return UIStatusBarStyle.LightContent
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -115,6 +119,10 @@ class EACStartAlarmViewController: UIViewController {
 	
 	@IBOutlet weak var startButton: UIButton!
 	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return UIStatusBarStyle.LightContent
+	}
+	
 	override func loadView() {
 		super.loadView()
 		let circle = UIBezierPath(ovalInRect: startButton.bounds)
@@ -135,6 +143,10 @@ class EACSetAlarmViewController: UIViewController {
 	@IBOutlet weak var alarmTimeButton: UIButton!
 	@IBOutlet weak var datePicker: UIDatePicker!
 	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return UIStatusBarStyle.Default
+	}
+	
 	override func loadView() {
 		super.loadView()
 		let circle = UIBezierPath(ovalInRect: alarmTimeButton.bounds)
@@ -149,7 +161,9 @@ class EACSetAlarmViewController: UIViewController {
 }
 
 class EACActiveAlarmViewController: UIViewController {
-	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return UIStatusBarStyle.LightContent
+	}
 }
 
 class EACCircleAnimatorManager: NSObject, UIViewControllerTransitioningDelegate {
@@ -200,13 +214,14 @@ class EACCircleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 	var centerPoint = CGPoint.zero
 	var centerRadius = CGFloat(0)
 	var isPresenting: Bool
+	var duration = NSTimeInterval(2)
 	
 	init(isPresenting: Bool) {
 		self.isPresenting = isPresenting
 	}
 	
 	func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-		return 2
+		return duration
 	}
 	
 	func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
@@ -214,7 +229,10 @@ class EACCircleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 		
 		let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
 		let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-		transitionContext.containerView()!.addSubview(toVC.view)
+		
+		if isPresenting {
+			transitionContext.containerView()!.addSubview(toVC.view)
+		}
 		
 		let startMask: UIBezierPath
 		let endMask: UIBezierPath
@@ -268,25 +286,29 @@ class EACCircleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 		} else {
 			fromVC.view.layer.mask = maskLayer
 		}
-		
+	
 		let maskLayerAnimation = CABasicAnimation(keyPath: "path")
 		maskLayerAnimation.fromValue = startMask.CGPath
 		maskLayerAnimation.toValue = endMask.CGPath
 		maskLayerAnimation.duration = transitionDuration(transitionContext)
 		maskLayerAnimation.delegate = self
+		maskLayerAnimation.fillMode = kCAFillModeForwards // Prevents flickering
+		maskLayerAnimation.removedOnCompletion = false // prevents flickering
 		maskLayer.addAnimation(maskLayerAnimation, forKey: "path")
 	}
-	
+
 	override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
 		transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
+	}
+	
+	func animationEnded(transitionCompleted: Bool) {
+		let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+		let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+		
 		if isPresenting {
-			transitionContext
-				.viewControllerForKey(UITransitionContextToViewControllerKey)?
-				.view.layer.mask = nil
+			toVC.view.layer.mask = nil
 		} else {
-			transitionContext
-				.viewControllerForKey(UITransitionContextFromViewControllerKey)?
-				.view.layer.mask = nil
+			fromVC.view.layer.mask = nil
 		}
 	}
 	
@@ -304,4 +326,19 @@ extension CGPoint {
 	func distance(p: CGPoint) -> CGFloat {
 		return sqrt(pow(self.x - p.x, 2) + pow(self.y - p.y, 2))
 	}
+}
+
+extension UIViewController {
+	
+	func viewToImage() -> UIImage {
+		var viewImage: UIImage
+		UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0)
+		self.view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+		
+		viewImage = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		
+		return viewImage
+	}
+	
 }

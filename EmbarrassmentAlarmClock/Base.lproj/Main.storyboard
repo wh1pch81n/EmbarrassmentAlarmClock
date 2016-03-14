@@ -63,6 +63,7 @@ Otherwise it is just another stupid alarm clock app, stupid</string>
                             <constraint firstAttribute="trailingMargin" secondItem="roX-dv-mTU" secondAttribute="trailing" constant="20" id="fdN-dL-UFh"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="viewFBButton" destination="roX-dv-mTU" id="e3i-Vw-bfv"/>
                     </connections>
@@ -130,6 +131,7 @@ The alarm clock that lets your friends know you're a moron.</string>
                             <constraint firstItem="9wI-j9-wJ8" firstAttribute="leading" secondItem="jjh-zE-9iM" secondAttribute="leadingMargin" id="ZlP-eL-nzV"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="startButton" destination="sEg-Wk-TfE" id="ntF-Nc-yV4"/>
                     </connections>
@@ -212,6 +214,7 @@ The alarm clock that lets your friends know you're a moron.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCL-ry-fsV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
