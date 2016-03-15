@@ -74,7 +74,6 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		let loginButton = FBSDKLoginButton()
 		
 		loginButton.delegate = self
@@ -304,7 +303,6 @@ class EACCircleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 	func animationEnded(transitionCompleted: Bool) {
 		let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
 		let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-		
 		if isPresenting {
 			toVC.view.layer.mask = nil
 		} else {
@@ -341,4 +339,76 @@ extension UIViewController {
 		return viewImage
 	}
 	
+}
+
+enum EACAudioFile: String {
+	case Glass
+	case Ping
+	case Sosumi
+	
+	func audio(bundle: NSBundle = NSBundle.mainBundle()) -> AVAudioPlayer {
+		return try! AVAudioPlayer(data: NSDataAsset(name: self.rawValue, bundle: bundle)!.data)
+	}
+}
+
+class EACAudioManager: NSObject, AVAudioPlayerDelegate {
+	static let sharedInstance = EACAudioManager()
+	var volumeDidChange = { (newVolume: Float) -> () in }
+	var currentVolume: Float { return AVAudioSession.sharedInstance().outputVolume }
+	
+	class AudioPlayerManager: NSObject, AVAudioPlayerDelegate {
+		static var sharedInstance = AudioPlayerManager()
+		
+		var audioPlayer = AVAudioPlayer()
+		var repeats = 0
+		
+		// MARK: AVAudioPlayerDelegate
+		func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+			playAudio()
+		}
+		
+		func playAudio() {
+			if repeats > 0 {
+				self.audioPlayer.play()
+			}
+			repeats -= 1
+		}
+		
+		func snooze() {
+			
+		}
+		
+		func stop() {
+			
+		}
+	}
+	
+	override init() {
+		super.init()
+		
+		try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+		
+		try! AVAudioSession.sharedInstance().setActive(true)
+		AVAudioSession.sharedInstance().addObserver(self, forKeyPath: "outputVolume", options: NSKeyValueObservingOptions.New, context: nil)
+	}
+	
+	override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+		if let keyPath = keyPath {
+			switch keyPath {
+			case "outputVolume":
+				volumeDidChange(object!.valueForKeyPath(keyPath) as! Float)
+			default:()
+			}
+		}
+	}
+	
+	func playSong(duration: NSTimeInterval = 60.0) {
+		let audioPlayer = EACAudioFile.Glass.audio()
+		audioPlayer.delegate = AudioPlayerManager.sharedInstance
+		AudioPlayerManager.sharedInstance.audioPlayer = audioPlayer
+		AudioPlayerManager.sharedInstance.repeats = Int(ceil(duration / audioPlayer.duration))
+		AudioPlayerManager.sharedInstance.playAudio()
+		
+	}
+
 }

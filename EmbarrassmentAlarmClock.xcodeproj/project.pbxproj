@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F685B341C9795BB009F04E2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F685B331C9795BB009F04E2 /* AudioToolbox.framework */; };
 		2FCCEEA51C94ED4900532E24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCEEA41C94ED4900532E24 /* AppDelegate.swift */; };
 		2FCCEEA71C94ED4900532E24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCEEA61C94ED4900532E24 /* ViewController.swift */; };
 		2FCCEEAA1C94ED4900532E24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCCEEA81C94ED4900532E24 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F685B331C9795BB009F04E2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2FCCEEA11C94ED4900532E24 /* EmbarrassmentAlarmClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmbarrassmentAlarmClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCCEEA41C94ED4900532E24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCCEEA61C94ED4900532E24 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F685B341C9795BB009F04E2 /* AudioToolbox.framework in Frameworks */,
 				2FCCEECB1C95006800532E24 /* FBSDKLoginKit.framework in Frameworks */,
 				2FCCEEC51C94EE3200532E24 /* FBSDKCoreKit.framework in Frameworks */,
 			);
@@ -67,6 +70,7 @@
 		2FCCEE981C94ED4900532E24 = {
 			isa = PBXGroup;
 			children = (
+				2F685B331C9795BB009F04E2 /* AudioToolbox.framework */,
 				2FCCEEC41C94EE3200532E24 /* FBSDKCoreKit.framework */,
 				2FCCEECA1C95006800532E24 /* FBSDKLoginKit.framework */,
 				2FCCEEA31C94ED4900532E24 /* EmbarrassmentAlarmClock */,
@@ -424,6 +428,7 @@
 				2FCCEEC01C94ED4900532E24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2FCCEEC11C94ED4900532E24 /* Build configuration list for PBXNativeTarget "EmbarrassmentAlarmClockTests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +437,7 @@
 				2FCCEEC31C94ED4900532E24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

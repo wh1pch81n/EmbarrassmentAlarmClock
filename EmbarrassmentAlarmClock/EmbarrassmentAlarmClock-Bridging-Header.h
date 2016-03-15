@@ -11,5 +11,6 @@
 
 @import FBSDKCoreKit;
 @import FBSDKLoginKit;
+@import AVFoundation;
 
 #endif /* EmbarrassmentAlarmClock_Bridging_Header_h */
