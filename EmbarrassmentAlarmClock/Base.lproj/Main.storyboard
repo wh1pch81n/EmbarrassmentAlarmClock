@@ -53,7 +53,7 @@ Otherwise it is just another stupid alarm clock app, stupid</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="3vC-rM-W6h" firstAttribute="top" secondItem="6ua-0r-yFb" secondAttribute="bottom" constant="60" id="6xS-QT-efs"/>
                             <constraint firstItem="3vC-rM-W6h" firstAttribute="leading" secondItem="HwK-xE-xgd" secondAttribute="leadingMargin" id="7YT-je-w38"/>
@@ -212,9 +212,57 @@ The alarm clock that lets your friends know you're a moron.</string>
                     <view key="view" contentMode="scaleToFill" id="act-aX-ske">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lock Phone and go to sleep Now!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Lk3-7Q-chk">
+                                <rect key="frame" x="16" y="60" width="288" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="skg-aS-RDT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="09:45 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7d-p6-EWO">
+                                <rect key="frame" x="16" y="176" width="288" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="C99-fi-1Jh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICP-Nr-HBt">
+                                <rect key="frame" x="110" y="388" width="100" height="100"/>
+                                <color key="backgroundColor" red="0.29019607843137257" green="0.59215686274509804" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="LbM-Gm-W8M"/>
+                                    <constraint firstAttribute="width" secondItem="ICP-Nr-HBt" secondAttribute="height" multiplier="1:1" id="tE2-AU-qBa"/>
+                                </constraints>
+                                <state key="normal" title="Off">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedSnooze:" destination="DaS-vM-CTh" eventType="touchUpInside" id="LsF-xb-pE7"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Lk3-7Q-chk" secondAttribute="trailing" id="1Gm-vb-jZ9"/>
+                            <constraint firstItem="Lk3-7Q-chk" firstAttribute="leading" secondItem="act-aX-ske" secondAttribute="leadingMargin" id="3vj-qK-SAD"/>
+                            <constraint firstItem="e7d-p6-EWO" firstAttribute="top" secondItem="Lk3-7Q-chk" secondAttribute="bottom" constant="16" id="Bft-9x-arE"/>
+                            <constraint firstItem="ICP-Nr-HBt" firstAttribute="centerX" secondItem="act-aX-ske" secondAttribute="centerX" id="Rjd-8d-O1Z"/>
+                            <constraint firstItem="Lk3-7Q-chk" firstAttribute="top" secondItem="DEm-XO-sKA" secondAttribute="bottom" constant="40" id="XBL-fw-W8x"/>
+                            <constraint firstItem="e7d-p6-EWO" firstAttribute="leading" secondItem="act-aX-ske" secondAttribute="leadingMargin" id="f3L-XH-KrR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="e7d-p6-EWO" secondAttribute="trailing" id="lSE-Y0-Jbc"/>
+                            <constraint firstItem="cjA-3s-ZBw" firstAttribute="top" secondItem="ICP-Nr-HBt" secondAttribute="bottom" constant="80" id="qBy-su-Npr"/>
+                        </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="alarmSetLabel" destination="e7d-p6-EWO" id="4SW-t7-e8k"/>
+                        <outlet property="snoozeCount" destination="ICP-Nr-HBt" id="cDv-8M-mHc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCL-ry-fsV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

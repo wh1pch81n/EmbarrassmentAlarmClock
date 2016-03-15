@@ -155,14 +155,40 @@ class EACSetAlarmViewController: UIViewController {
 	}
 	
 	@IBAction func tappedAlarmTimeButton(sender: AnyObject) {
-		
+		let destinationViewController = storyboard!.instantiateViewControllerWithIdentifier(typeAsString(EACActiveAlarmViewController))
+		destinationViewController.transitioningDelegate = EACCircleAnimatorManager.sharedInstance
+		presentViewController(destinationViewController, animated: true, completion: nil)
 	}
 }
 
 class EACActiveAlarmViewController: UIViewController {
+	
+	@IBOutlet weak var alarmSetLabel: UILabel!
+	
+	@IBOutlet weak var snoozeCount: UIButton!
+	
+	override func loadView() {
+		super.loadView()
+		let circle = UIBezierPath(ovalInRect: snoozeCount.bounds)
+		let maskShape = CAShapeLayer()
+		maskShape.path = circle.CGPath
+		snoozeCount.layer.mask = maskShape
+	}
+	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
 		return UIStatusBarStyle.LightContent
 	}
+	
+	override func viewDidAppear(animated: Bool) {
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(10.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+			EACAudioManager.sharedInstance.playSong()
+		})
+	}
+	
+	@IBAction func tappedSnooze(sender: AnyObject) {
+		
+	}
+	
 }
 
 class EACCircleAnimatorManager: NSObject, UIViewControllerTransitioningDelegate {
@@ -213,7 +239,7 @@ class EACCircleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 	var centerPoint = CGPoint.zero
 	var centerRadius = CGFloat(0)
 	var isPresenting: Bool
-	var duration = NSTimeInterval(2)
+	var duration = NSTimeInterval(0.7)
 	
 	init(isPresenting: Bool) {
 		self.isPresenting = isPresenting
