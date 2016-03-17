@@ -25,6 +25,7 @@ protocol EACChildViewControllerDelegate: class {
 	func transitionToNextVC(sender: UIViewController)
 	
 	func transitionToPrevVC(sender: UIViewController)
+	func hideButtonBar(hide: Bool)
 }
 
 protocol EACChildViewController: class {
@@ -34,6 +35,7 @@ protocol EACChildViewController: class {
 class ViewController: UIViewController, EACChildViewControllerDelegate {
 	
 	@IBOutlet weak var contentView: UIView!
+	@IBOutlet weak var containerViewButtons: UIView!
 	
 	/**Returns a UIViewController if there is some presets that user needs to do before the app will work properly*/
 	var presetViewController: UIViewController? {
@@ -67,10 +69,11 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 		vcs.forEach({ $0.eacChildViewControllerDelegate = self })
 		
 		currentChildViewController = presetViewController ?? startAlarmVC
-		
+		currentChildViewController.willMoveToParentViewController(self)
+		self.addChildViewController(currentChildViewController)
 		contentView.addSubview(currentChildViewController.view)
 		constrainSubview(currentChildViewController.view, toSuperView: contentView)
-		
+		currentChildViewController.didMoveToParentViewController(self)
 //		NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationWillEnterForegroundNotification, object: nil, queue: nil) { [unowned self] (notification: NSNotification) -> Void in
 //
 //			if let setUpVCRequired = self.presetViewController where self.currentChildViewController != setUpVCRequired {
@@ -102,19 +105,23 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 	}
 	
 	func transitionFromViewController(fromViewController: UIViewController, toViewController: UIViewController, animation: ((UIViewControllerAnimatedTransitioning) -> ())? = nil) {
-		
+		toViewController.willMoveToParentViewController(self)
 		let context = EACContextTransitioning(fromVC: self.currentChildViewController, toVC: toViewController, contentView: self.contentView)
 		self.previousChildViewController = self.currentChildViewController
 		self.currentChildViewController = toViewController
+		self.addChildViewController(toViewController)
 		let animator = EACCircleAnimator(isPresenting: true)
 		context.animatorDelegate = animator
 		animation?(animator)
 		animator.animateTransition(context)
+		toViewController.didMoveToParentViewController(self)
 	}
 	
 	// MARK: Buttons
 	@IBAction func tappedFacebookButton(sender: UITapGestureRecognizer) {
-		let nextVC: UIViewController
+		//facebookLoginVC.transitioningDelegate = EACCircleAnimatorManager.sharedInstance
+		//presentViewController(facebookLoginVC, animated: true, completion: nil)
+				let nextVC: UIViewController
 		if self.currentChildViewController == facebookLoginVC {
 			// dismiss
 			nextVC = self.previousChildViewController!
@@ -132,8 +139,10 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 		case facebookLoginVC:
 			if let setUpVC = presetViewController {
 				nextVC = setUpVC
+			} else if let prevVC = self.previousChildViewController {
+				nextVC = prevVC
 			} else {
-				fallthrough
+				nextVC = startAlarmVC
 			}
 		case startAlarmVC:
 			nextVC = setAlarmVC
@@ -158,6 +167,10 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 	
 	func transitionToPrevVC(sender: UIViewController) {
 		
+	}
+	
+	func hideButtonBar(hide: Bool) {
+		containerViewButtons.hidden = hide
 	}
 	
 }
@@ -188,30 +201,46 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate, EACChi
 		loginButton.bottomAnchor.constraintEqualToAnchor(viewFBButton.bottomAnchor).active = true
 	}
 	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		eacChildViewControllerDelegate.hideButtonBar(FBSDKAccessToken.currentAccessToken() == nil)
+	}
+	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
-		if FBSDKAccessToken.currentAccessToken() != nil {
-			//presentingViewController!.transitioningDelegate = EACCircleAnimatorManager.sharedInstance
-			dismissViewControllerAnimated(true, completion: nil)
-		}
+		//if FBSDKAccessToken.currentAccessToken() != nil {
+//			//presentingViewController!.transitioningDelegate = EACCircleAnimatorManager.sharedInstance
+//			dismissViewControllerAnimated(true, completion: nil)
+//			eacChildViewControllerDelegate.transitionToNextVC(self)
+		//}
+		
 	}
 	
 	func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
 		
-		if let result = result, permissions = result.grantedPermissions
-		where permissions.contains(FB_PUBLISH_ACTIONS)
-		{
-			print("granted permissions ", permissions)
-		} else {
-			let alert = UIAlertView(title: "Login Error", message: "Please try logging in again.  If that doesn't work, go to safari and log out of facebook", delegate: nil, cancelButtonTitle: "Ok")
-			alert.show()
+		if let result = result {
+			if result.isCancelled {
+				
+			} else if let permissions = result.grantedPermissions
+				where permissions.contains(FB_PUBLISH_ACTIONS)
+			{
+				print("granted permissions ", permissions)
+				eacChildViewControllerDelegate.transitionToNextVC(self)
+			} else {
+				let alert = UIAlertView(title: "Login Error", message: "Please try logging in again.  If that doesn't work, go to safari and log out of facebook", delegate: nil, cancelButtonTitle: "Ok")
+				alert.show()
+			}
 		}
 	}
 	
 	func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-		
+		eacChildViewControllerDelegate.hideButtonBar(FBSDKAccessToken.currentAccessToken() == nil)
 	}
 
+//	override func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+//		parentViewController?.presentViewController(viewControllerToPresent, animated: flag, completion: completion)
+//	}
+//	
 }
 
 class EACStartAlarmViewController: UIViewController, EACChildViewController {
@@ -233,6 +262,11 @@ class EACStartAlarmViewController: UIViewController, EACChildViewController {
 	
 	@IBAction func tappedStartButton(sender: AnyObject) {
 		eacChildViewControllerDelegate.transitionToNextVC(self)
+	}
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		eacChildViewControllerDelegate.hideButtonBar(false)
 	}
 	
 }
@@ -260,6 +294,12 @@ class EACSetAlarmViewController: UIViewController, EACChildViewController {
 		// transition to next view
 		eacChildViewControllerDelegate.transitionToNextVC(self)
 	}
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		eacChildViewControllerDelegate.hideButtonBar(false)
+	}
+	
 }
 
 class EACActiveAlarmViewController: UIViewController, EACChildViewController {
@@ -279,6 +319,11 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewController {
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
 		return UIStatusBarStyle.LightContent
+	}
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		eacChildViewControllerDelegate.hideButtonBar(false)
 	}
 	
 	override func viewDidAppear(animated: Bool) {
