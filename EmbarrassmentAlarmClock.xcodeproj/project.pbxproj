@@ -17,6 +17,7 @@
 		2FCCEEC51C94EE3200532E24 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCCEEC41C94EE3200532E24 /* FBSDKCoreKit.framework */; };
 		2FCCEECB1C95006800532E24 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCCEECA1C95006800532E24 /* FBSDKLoginKit.framework */; };
 		2FD62EE31C9CE32100EB7D1E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD62EE21C9CE32100EB7D1E /* FBSDKShareKit.framework */; };
+		2FD62EE51C9DD4FD00EB7D1E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD62EE41C9DD4FD00EB7D1E /* Social.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		2FCCEEC81C94F0BF00532E24 /* EmbarrassmentAlarmClock-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmbarrassmentAlarmClock-Bridging-Header.h"; sourceTree = "<group>"; };
 		2FCCEECA1C95006800532E24 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		2FD62EE21C9CE32100EB7D1E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		2FD62EE41C9DD4FD00EB7D1E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FD62EE51C9DD4FD00EB7D1E /* Social.framework in Frameworks */,
 				2FD62EE31C9CE32100EB7D1E /* FBSDKShareKit.framework in Frameworks */,
 				2F685B341C9795BB009F04E2 /* AudioToolbox.framework in Frameworks */,
 				2FCCEECB1C95006800532E24 /* FBSDKLoginKit.framework in Frameworks */,
@@ -73,6 +76,7 @@
 		2FCCEE981C94ED4900532E24 = {
 			isa = PBXGroup;
 			children = (
+				2FD62EE41C9DD4FD00EB7D1E /* Social.framework */,
 				2FD62EE21C9CE32100EB7D1E /* FBSDKShareKit.framework */,
 				2F685B331C9795BB009F04E2 /* AudioToolbox.framework */,
 				2FCCEEC41C94EE3200532E24 /* FBSDKCoreKit.framework */,

@@ -40,7 +40,7 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 	/**Returns a UIViewController if there is some presets that user needs to do before the app will work properly*/
 	var presetViewController: UIViewController? {
 		let accessToken = FBSDKAccessToken.currentAccessToken()
-		if accessToken == nil {
+		if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) == false && accessToken == nil {
 			// Needs Facebook login
 			return facebookLoginVC
 		}
@@ -460,11 +460,11 @@ class EACAlarmManager: NSObject {
 	}
 	
 	func stopAlarm() {
-		snoozeAmount = 0
 		switch EACAlarmManager.sharedInstance.alarmState {
 		case .Ringing, .Snooze: submitToFacebook()
 		default:()
 		}
+		snoozeAmount = 0
 		alarmState = .Initial
 		EACAudioManager.AudioPlayerManager.sharedInstance.stop()
 		timer?.invalidate()
@@ -480,7 +480,7 @@ class EACAlarmManager: NSObject {
 	func submitToFacebook() {
 		let df = NSDateFormatter()
 		df.dateFormat = "MMM dd, yyyy @ hh:mm:ss"
-		var message: String = ""//"[\(df.stringFromDate(NSDate()))] "
+		var message: String = ""
 		switch numOfSnoozes() {
 		case 0:
 			message += "I woke up without snoozing my alarm!"
@@ -490,27 +490,26 @@ class EACAlarmManager: NSObject {
 			message += "I snoozed my ass \(numOfSnoozes()) times"
 		}
 		
-//		let accessToken = FBSDKAccessToken.currentAccessToken()
-//		if accessToken.hasGranted(FB_PUBLISH_ACTIONS) {
-//			let req = FBSDKGraphRequest(graphPath: FB_GRAPHPATH_FEED, parameters: [
-//				FB_GRAPHPATH_FEED_MESSAGE_KEY : message
-//				], HTTPMethod: POST)
-//			req.startWithCompletionHandler({ (gReq: FBSDKGraphRequestConnection!, data: AnyObject!, err: NSError!) -> Void in
-//				if err == nil {
-//					print("Post id", data)
-//				}
-//			})
-//		}
-		let components = NSURLComponents(string: "http://derrickho.co.nf/skills.html")!
-		components.queryItems = [
-			NSURLQueryItem(name: "snoozeMSG", value: message)
-		]
-		let content = FBSDKShareLinkContent()
-		content.contentURL = NSURL(string: "https://www.facebook.com")//components.URL!
-		content.contentDescription = message
-		FBSDKShareDialog.showFromViewController(activeAlarmVC, withContent: content, delegate: activeAlarmVC)
-		print(message)
-		print(components)
+		//message += " [\(df.stringFromDate(NSDate()))]"
+		
+		let label = UILabel()
+		label.numberOfLines = 0
+		label.textAlignment = NSTextAlignment.Center
+		label.text = message
+		label.backgroundColor = UIColor.blackColor()
+		label.textColor = UIColor.whiteColor()
+		
+		let size = label.sizeThatFits(CGSize(width: 320, height: 0))
+		label.frame.size = size
+		
+		let img = viewToImage(label)
+		let photoImage = FBSDKSharePhoto()
+		photoImage.image = img
+		photoImage.userGenerated = false
+		let content = FBSDKSharePhotoContent()
+		content.photos = [photoImage]
+		
+		FBSDKShareDialog.showFromViewController(activeAlarmVC.parentViewController, withContent: content, delegate: activeAlarmVC)
 	}
 	
 }
@@ -792,20 +791,18 @@ extension CGPoint {
 	}
 }
 
-extension UIViewController {
+
+func viewToImage(view: UIView) -> UIImage {
+	var viewImage: UIImage
+	UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0)
+	view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
 	
-	func viewToImage() -> UIImage {
-		var viewImage: UIImage
-		UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0)
-		self.view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-		
-		viewImage = UIGraphicsGetImageFromCurrentImageContext()
-		UIGraphicsEndImageContext()
-		
-		return viewImage
-	}
+	viewImage = UIGraphicsGetImageFromCurrentImageContext()
+	UIGraphicsEndImageContext()
 	
+	return viewImage
 }
+
 
 enum EACAudioFile: String {
 	case Glass

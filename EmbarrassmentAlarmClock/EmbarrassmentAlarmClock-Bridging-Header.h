@@ -13,5 +13,6 @@
 @import FBSDKLoginKit;
 @import FBSDKShareKit;
 @import AVFoundation;
+@import Social;
 
 #endif /* EmbarrassmentAlarmClock_Bridging_Header_h */
