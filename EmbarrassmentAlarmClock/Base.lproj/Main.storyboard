@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="EmbarrassmentAlarmClock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WTFU" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,41 +22,38 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWg-4j-SGf" userLabel="contentView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4yt-Wj-ouA" userLabel="Buttons">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vxx-gb-n7K">
                                 <rect key="frame" x="0.0" y="20" width="320" height="56"/>
                                 <subviews>
-                                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Facebook-F-icon" translatesAutoresizingMaskIntoConstraints="NO" id="47M-9A-riu">
-                                        <rect key="frame" x="8" y="8" width="40" height="40"/>
-                                        <gestureRecognizers/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Facebook-F-icon" translatesAutoresizingMaskIntoConstraints="NO" id="wYy-cS-HVz">
+                                        <rect key="frame" x="272" y="8" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="JZU-jh-vFG"/>
-                                            <constraint firstAttribute="height" constant="40" id="jib-rR-Efn"/>
+                                            <constraint firstAttribute="width" secondItem="wYy-cS-HVz" secondAttribute="height" multiplier="1:1" id="2J0-15-5ps"/>
+                                            <constraint firstAttribute="height" constant="40" id="Bov-yY-uHH"/>
                                         </constraints>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="AS0-6r-zCI" appends="YES" id="6Ll-Yp-KvZ"/>
-                                        </connections>
                                     </imageView>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="47M-9A-riu" firstAttribute="top" secondItem="4yt-Wj-ouA" secondAttribute="top" constant="8" id="0Y1-xr-j4k"/>
-                                    <constraint firstAttribute="bottom" secondItem="47M-9A-riu" secondAttribute="bottom" constant="8" id="JwI-dY-dhG"/>
-                                    <constraint firstItem="47M-9A-riu" firstAttribute="leading" secondItem="4yt-Wj-ouA" secondAttribute="leading" constant="8" id="QGX-6V-E4d"/>
+                                    <constraint firstAttribute="trailing" secondItem="wYy-cS-HVz" secondAttribute="trailing" constant="8" id="1kA-7D-tcl"/>
+                                    <constraint firstItem="wYy-cS-HVz" firstAttribute="top" secondItem="vxx-gb-n7K" secondAttribute="top" constant="8" id="YI1-1d-5E7"/>
+                                    <constraint firstAttribute="bottom" secondItem="wYy-cS-HVz" secondAttribute="bottom" constant="8" id="fqb-0V-cHF"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4yt-Wj-ouA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8Oq-bh-jGm"/>
                             <constraint firstItem="UWg-4j-SGf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Ieg-0o-BwD"/>
                             <constraint firstItem="UWg-4j-SGf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="KUI-0G-dn1"/>
-                            <constraint firstAttribute="trailing" secondItem="4yt-Wj-ouA" secondAttribute="trailing" id="bZ0-iM-jme"/>
-                            <constraint firstItem="4yt-Wj-ouA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eqh-DJ-3OG"/>
+                            <constraint firstItem="vxx-gb-n7K" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aSq-BH-4QZ"/>
+                            <constraint firstAttribute="trailing" secondItem="vxx-gb-n7K" secondAttribute="trailing" id="cJo-gy-kRa"/>
+                            <constraint firstItem="vxx-gb-n7K" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hr3-DV-7kr"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UWg-4j-SGf" secondAttribute="bottom" id="jPf-ej-iXL"/>
                             <constraint firstAttribute="trailing" secondItem="UWg-4j-SGf" secondAttribute="trailing" id="rCx-ca-frI"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="containerViewButtons" destination="4yt-Wj-ouA" id="E92-cG-2pB"/>
+                        <outlet property="containerViewButtons" destination="vxx-gb-n7K" id="lB1-RO-Ad2"/>
                         <outlet property="contentView" destination="UWg-4j-SGf" id="0VP-d1-yqh"/>
                     </connections>
                 </viewController>
@@ -73,7 +70,7 @@
         <!--Login View Controller-->
         <scene sceneID="PxH-bM-Z8C">
             <objects>
-                <viewController storyboardIdentifier="EACLoginViewController" id="qXn-Nh-1Ra" customClass="EACLoginViewController" customModule="EmbarrassmentAlarmClock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EACLoginViewController" id="qXn-Nh-1Ra" customClass="EACLoginViewController" customModule="WTFU" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6ua-0r-yFb"/>
                         <viewControllerLayoutGuide type="bottom" id="ov0-oh-abO"/>
@@ -120,7 +117,7 @@ Otherwise it is just another stupid alarm clock app, stupid</string>
         <!--Start Alarm View Controller-->
         <scene sceneID="imh-rD-ET1">
             <objects>
-                <viewController storyboardIdentifier="EACStartAlarmViewController" id="oY9-AF-gbz" customClass="EACStartAlarmViewController" customModule="EmbarrassmentAlarmClock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EACStartAlarmViewController" id="oY9-AF-gbz" customClass="EACStartAlarmViewController" customModule="WTFU" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OVU-IZ-k5K"/>
                         <viewControllerLayoutGuide type="bottom" id="wQd-sg-pKE"/>
@@ -188,7 +185,7 @@ The alarm clock that lets your friends know you're a moron.</string>
         <!--Set Alarm View Controller-->
         <scene sceneID="0O1-NR-LHG">
             <objects>
-                <viewController storyboardIdentifier="EACSetAlarmViewController" id="aHL-LL-HP7" customClass="EACSetAlarmViewController" customModule="EmbarrassmentAlarmClock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EACSetAlarmViewController" id="aHL-LL-HP7" customClass="EACSetAlarmViewController" customModule="WTFU" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LFF-eB-iL4"/>
                         <viewControllerLayoutGuide type="bottom" id="VI8-Ww-9DG"/>
@@ -249,7 +246,7 @@ The alarm clock that lets your friends know you're a moron.</string>
         <!--Active Alarm View Controller-->
         <scene sceneID="6SZ-2r-7UT">
             <objects>
-                <viewController storyboardIdentifier="EACActiveAlarmViewController" id="DaS-vM-CTh" customClass="EACActiveAlarmViewController" customModule="EmbarrassmentAlarmClock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EACActiveAlarmViewController" id="DaS-vM-CTh" customClass="EACActiveAlarmViewController" customModule="WTFU" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DEm-XO-sKA"/>
                         <viewControllerLayoutGuide type="bottom" id="cjA-3s-ZBw"/>
@@ -312,6 +309,66 @@ The alarm clock that lets your friends know you're a moron.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCL-ry-fsV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1340" y="-359"/>
+        </scene>
+        <!--Post Facebook View Controller-->
+        <scene sceneID="Rnn-Ta-AsL">
+            <objects>
+                <viewController storyboardIdentifier="EACPostFacebookViewController" id="SbU-Zz-thO" customClass="EACPostFacebookViewController" customModule="WTFU" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gd3-0j-B96"/>
+                        <viewControllerLayoutGuide type="bottom" id="rww-Gy-RBO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ESJ-QY-QDl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" text="Post Image to Facebook" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0j-bD-sSn">
+                                <rect key="frame" x="105" y="40" width="110" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbm-jq-NVa">
+                                <rect key="frame" x="16" y="46" width="81" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="tappedCancel:" destination="SbU-Zz-thO" eventType="touchUpInside" id="lnU-kb-7TD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyI-dw-ybe">
+                                <rect key="frame" x="223" y="46" width="81" height="30"/>
+                                <state key="normal" title="Post"/>
+                                <connections>
+                                    <action selector="tappedPostToFacebook:" destination="SbU-Zz-thO" eventType="touchUpInside" id="yed-l5-EBZ"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S1c-d2-uP4">
+                                <rect key="frame" x="16" y="101" width="288" height="447"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qbm-jq-NVa" firstAttribute="leading" secondItem="ESJ-QY-QDl" secondAttribute="leadingMargin" id="A83-HG-li3"/>
+                            <constraint firstItem="qbm-jq-NVa" firstAttribute="centerY" secondItem="C0j-bD-sSn" secondAttribute="centerY" id="A9D-DA-Xuv"/>
+                            <constraint firstItem="S1c-d2-uP4" firstAttribute="leading" secondItem="ESJ-QY-QDl" secondAttribute="leadingMargin" id="CSt-Fz-w2w"/>
+                            <constraint firstItem="HyI-dw-ybe" firstAttribute="centerY" secondItem="C0j-bD-sSn" secondAttribute="centerY" id="DfZ-dv-iiT"/>
+                            <constraint firstItem="C0j-bD-sSn" firstAttribute="leading" secondItem="qbm-jq-NVa" secondAttribute="trailing" constant="8" id="Hhj-Ap-DfB"/>
+                            <constraint firstItem="C0j-bD-sSn" firstAttribute="centerX" secondItem="ESJ-QY-QDl" secondAttribute="centerX" id="VUF-rq-pQ6"/>
+                            <constraint firstItem="rww-Gy-RBO" firstAttribute="top" secondItem="S1c-d2-uP4" secondAttribute="bottom" constant="20" id="aUu-lw-Wy6"/>
+                            <constraint firstItem="C0j-bD-sSn" firstAttribute="top" secondItem="gd3-0j-B96" secondAttribute="bottom" constant="20" id="iRz-oa-vbb"/>
+                            <constraint firstItem="HyI-dw-ybe" firstAttribute="leading" secondItem="C0j-bD-sSn" secondAttribute="trailing" constant="8" id="ms5-el-mGK"/>
+                            <constraint firstItem="S1c-d2-uP4" firstAttribute="top" secondItem="C0j-bD-sSn" secondAttribute="bottom" constant="20" id="rF4-8N-lEE"/>
+                            <constraint firstItem="S1c-d2-uP4" firstAttribute="trailing" secondItem="ESJ-QY-QDl" secondAttribute="trailingMargin" id="u5y-O2-MUX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HyI-dw-ybe" secondAttribute="trailing" id="u7n-JE-LUR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="S1c-d2-uP4" id="ToC-1I-bC0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lhW-Xq-76M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1683" y="-359"/>
         </scene>
     </scenes>
     <resources>

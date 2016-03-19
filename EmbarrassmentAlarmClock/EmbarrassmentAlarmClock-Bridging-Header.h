@@ -9,6 +9,7 @@
 #ifndef EmbarrassmentAlarmClock_Bridging_Header_h
 #define EmbarrassmentAlarmClock_Bridging_Header_h
 
+@import UIKit;
 @import FBSDKCoreKit;
 @import FBSDKLoginKit;
 @import FBSDKShareKit;
