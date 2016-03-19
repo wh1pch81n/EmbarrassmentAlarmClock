@@ -74,6 +74,8 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 		contentView.addSubview(currentChildViewController.view)
 		constrainSubview(currentChildViewController.view, toSuperView: contentView)
 		currentChildViewController.didMoveToParentViewController(self)
+		
+		self.setNeedsStatusBarAppearanceUpdate()
 //		NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationWillEnterForegroundNotification, object: nil, queue: nil) { [unowned self] (notification: NSNotification) -> Void in
 //
 //			if let setUpVCRequired = self.presetViewController where self.currentChildViewController != setUpVCRequired {
@@ -90,18 +92,6 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
-//		let accessToken = FBSDKAccessToken.currentAccessToken()
-//			if accessToken.hasGranted(FB_PUBLISH_ACTIONS) {
-//				let req = FBSDKGraphRequest(graphPath: FB_GRAPHPATH_FEED, parameters: [
-//					FB_GRAPHPATH_FEED_MESSAGE_KEY : "Hi"
-//					], HTTPMethod: POST)
-//				req.startWithCompletionHandler({ (gReq: FBSDKGraphRequestConnection!, data: AnyObject!, err: NSError!) -> Void in
-//					if err == nil {
-//						print("Post id", data)
-//					}
-//				})
-//			}
-
 	}
 	
 	func transitionFromViewController(fromViewController: UIViewController, toViewController: UIViewController, animation: ((UIViewControllerAnimatedTransitioning) -> ())? = nil) {
@@ -115,6 +105,8 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 		animation?(animator)
 		animator.animateTransition(context)
 		toViewController.didMoveToParentViewController(self)
+		
+		self.setNeedsStatusBarAppearanceUpdate()
 	}
 	
 	// MARK: Buttons
@@ -135,6 +127,15 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 	func transitionToNextVC(sender: UIViewController) {
 		let nextVC: UIViewController!
 		var animator: ((animator: UIViewControllerAnimatedTransitioning) -> ())? = nil
+		
+		let animatorEACCircle = { (centerPoint centerPoint: CGPoint) -> (animator: UIViewControllerAnimatedTransitioning) -> () in
+			return { (animator: UIViewControllerAnimatedTransitioning) -> () in
+				if let _animator = animator as? EACCircleAnimator {
+					_animator.centerPoint = centerPoint
+				}
+			}
+		}
+		
 		switch sender {
 		case facebookLoginVC:
 			if let setUpVC = presetViewController {
@@ -146,18 +147,13 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 			}
 		case startAlarmVC:
 			nextVC = setAlarmVC
-			animator = { (animator: UIViewControllerAnimatedTransitioning) -> () in
-				if let _animator = animator as? EACCircleAnimator {
-					_animator.centerPoint = startAlarmVC.startButton.center
-				}
-			}
+			animator = animatorEACCircle(centerPoint: startAlarmVC.startButton.center)
 		case setAlarmVC:
 			nextVC = activeAlarmVC
-			animator = { (animator: UIViewControllerAnimatedTransitioning) -> () in
-				if let _animator = animator as? EACCircleAnimator {
-					_animator.centerPoint = setAlarmVC.alarmTimeButton.center
-				}
-			}
+			animator = animatorEACCircle(centerPoint: setAlarmVC.alarmTimeButton.center)
+		case activeAlarmVC:
+			nextVC = startAlarmVC
+			animator = animatorEACCircle(centerPoint: CGPoint(x: activeAlarmVC.view.frame.minX, y: activeAlarmVC.view.frame.maxY))
 		default:
 			return
 		}
@@ -171,6 +167,10 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 	
 	func hideButtonBar(hide: Bool) {
 		containerViewButtons.hidden = hide
+	}
+	
+	override func childViewControllerForStatusBarStyle() -> UIViewController? {
+		return currentChildViewController
 	}
 	
 }
@@ -276,6 +276,8 @@ class EACSetAlarmViewController: UIViewController, EACChildViewController {
 	@IBOutlet weak var datePicker: UIDatePicker!
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
 
+	let chosenDateKey = "chosen_date_key"
+	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
 		return UIStatusBarStyle.Default
 	}
@@ -290,7 +292,10 @@ class EACSetAlarmViewController: UIViewController, EACChildViewController {
 	
 	@IBAction func tappedAlarmTimeButton(sender: AnyObject) {
 		// save the time somewhere
+		EACAlarmManager.sharedInstance.alarmFireDate = datePicker.date
+		EACAlarmManager.sharedInstance.armAlarm()
 		
+		NSUserDefaults.standardUserDefaults().setObject(datePicker.date, forKey: chosenDateKey)
 		// transition to next view
 		eacChildViewControllerDelegate.transitionToNextVC(self)
 	}
@@ -298,11 +303,17 @@ class EACSetAlarmViewController: UIViewController, EACChildViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		eacChildViewControllerDelegate.hideButtonBar(false)
+		
+		if let object = NSUserDefaults.standardUserDefaults().objectForKey(chosenDateKey) {
+			if let dateObject = object as? NSDate {
+				datePicker.setDate(dateObject, animated: true)
+			}
+		}
 	}
 	
 }
 
-class EACActiveAlarmViewController: UIViewController, EACChildViewController {
+class EACActiveAlarmViewController: UIViewController, EACChildViewController, EACAlarmManagerDelegate {
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
 
 	@IBOutlet weak var alarmSetLabel: UILabel!
@@ -315,6 +326,45 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewController {
 		let maskShape = CAShapeLayer()
 		maskShape.path = circle.CGPath
 		snoozeCount.layer.mask = maskShape
+		
+		self.view.addGestureRecognizer({
+			let g = UISwipeGestureRecognizer(target: self, action: "stopAlarm:")
+			g.direction = UISwipeGestureRecognizerDirection.Right
+			return g
+		}())
+		view.userInteractionEnabled = true
+	}
+	
+	func alarmStateDidChange(alarmState: EACAlarmState) {
+		updateSnoozeButton()
+	}
+	
+	func updateSnoozeButton() {
+		switch EACAlarmManager.sharedInstance.alarmState {
+		case .Initial:
+			snoozeCount.setTitle("Won't ring", forState: UIControlState.Normal)
+		case .Armed:
+			snoozeCount.setTitle("Disable Alarm", forState: UIControlState.Normal)
+		case .Ringing:
+			snoozeCount.setTitle("Snooze Me!", forState: UIControlState.Normal)
+		case .Snooze:
+			let numSnoozes = EACAlarmManager.sharedInstance.numOfSnoozes()
+			let text = numSnoozes == 1 ? "\(numSnoozes)\nSnooze": "\(numSnoozes)\nSnoozes"
+			snoozeCount.setTitle(text, forState: UIControlState.Normal)
+		}
+		snoozeCount.titleLabel!.numberOfLines = 0
+		snoozeCount.titleLabel!.setNeedsLayout()
+		snoozeCount.titleLabel!.textAlignment = NSTextAlignment.Center
+	}
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		updateSnoozeButton()
+		EACAlarmManager.sharedInstance.eacAlarmManagerDelegate = self
+		
+		NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidBecomeActiveNotification, object: nil, queue: nil) { (n: NSNotification) -> Void in
+			self.updateSnoozeButton()
+		}
 	}
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -324,15 +374,158 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		eacChildViewControllerDelegate.hideButtonBar(false)
-	}
-	
-	override func viewDidAppear(animated: Bool) {
-//		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(10.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-//			EACAudioManager.sharedInstance.playSong()
-//		})
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "hh:mm a"
+		alarmSetLabel.text = dateFormatter.stringFromDate(EACAlarmManager.sharedInstance.alarmFireDate!)
+		
+		updateSnoozeButton()
 	}
 	
 	@IBAction func tappedSnooze(sender: AnyObject) {
+		switch EACAlarmManager.sharedInstance.alarmState {
+		case .Initial: fallthrough
+		case .Armed:
+			stopAlarm(self)
+		case .Ringing:
+			EACAlarmManager.sharedInstance.snoozeAlarm()
+		case .Snooze:
+			() // Probably add some useless animation
+		}
+	}
+	
+	@IBAction func stopAlarm(sender: AnyObject) {
+		EACAlarmManager.sharedInstance.stopAlarm()
+		eacChildViewControllerDelegate.transitionToNextVC(self)
+	}
+	
+}
+
+enum EACAlarmState {
+	case Initial
+	case Armed
+	case Ringing
+	case Snooze
+}
+
+protocol EACAlarmManagerDelegate: class {
+	func alarmStateDidChange(alarmState: EACAlarmState)
+}
+
+class EACAlarmManager: NSObject {
+	
+	static let sharedInstance = EACAlarmManager()
+	weak var eacAlarmManagerDelegate: EACAlarmManagerDelegate?
+	var snoozeAmount = 0
+	var alarmFireDate: NSDate?
+	private var timer: NSTimer?
+	var alarmState = EACAlarmState.Initial {
+		didSet {
+			self.eacAlarmManagerDelegate?.alarmStateDidChange(alarmState)
+		}
+	}
+	
+	func alarmAction(timer: NSTimer) {
+		alarmState = .Ringing
+		EACAudioManager.sharedInstance.playSong()
+	}
+	
+	func numOfSnoozes() -> Int {
+		return snoozeAmount
+	}
+	
+	func armAlarm() {
+		alarmState = .Armed
+		let cal = NSCalendar.currentCalendar()
+		let nowDate = NSDate()
+		let nextDateComponent = cal.components([NSCalendarUnit.Hour, .Minute, .Second], fromDate: alarmFireDate!)
+
+		let nextDate = cal.nextDateAfterDate(nowDate,
+			matchingHour: nextDateComponent.hour,
+			minute: nextDateComponent.minute,
+			second: 0, options: NSCalendarOptions.MatchNextTime)
+		
+		print("Now Date", nowDate)
+		let nowDF = NSDateFormatter()
+		nowDF.dateFormat = "HH:mm:ss"
+		print(nowDF.stringFromDate(nowDate))
+		
+		timer = NSTimer(fireDate: nextDate!, interval: 600, target: self, selector: "alarmAction:", userInfo: nil, repeats: true)
+		NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
+		
+		EACAudioManager.AudioPlayerManager.sharedInstance.stoppedPlaying = { (stoppedBecauseAutoSnooze: Bool) -> () in
+			if stoppedBecauseAutoSnooze {
+				self.snoozeAlarm()
+			}
+		}
+	}
+	
+	func stopAlarm() {
+		snoozeAmount = 0
+		switch EACAlarmManager.sharedInstance.alarmState {
+		case .Ringing, .Snooze: submitToFacebook()
+		default:()
+		}
+		alarmState = .Initial
+		EACAudioManager.AudioPlayerManager.sharedInstance.stop()
+		timer?.invalidate()
+		timer = nil
+	}
+	
+	func snoozeAlarm() {
+		snoozeAmount += 1
+		alarmState = .Snooze
+		EACAudioManager.AudioPlayerManager.sharedInstance.snooze()
+	}
+	
+	func submitToFacebook() {
+		let df = NSDateFormatter()
+		df.dateFormat = "MMM dd, yyyy @ hh:mm:ss"
+		var message: String = ""//"[\(df.stringFromDate(NSDate()))] "
+		switch numOfSnoozes() {
+		case 0:
+			message += "I woke up without snoozing my alarm!"
+		case 1:
+			message += "I snoozed my alarm Just once."
+		default:
+			message += "I snoozed my ass \(numOfSnoozes()) times"
+		}
+		
+//		let accessToken = FBSDKAccessToken.currentAccessToken()
+//		if accessToken.hasGranted(FB_PUBLISH_ACTIONS) {
+//			let req = FBSDKGraphRequest(graphPath: FB_GRAPHPATH_FEED, parameters: [
+//				FB_GRAPHPATH_FEED_MESSAGE_KEY : message
+//				], HTTPMethod: POST)
+//			req.startWithCompletionHandler({ (gReq: FBSDKGraphRequestConnection!, data: AnyObject!, err: NSError!) -> Void in
+//				if err == nil {
+//					print("Post id", data)
+//				}
+//			})
+//		}
+		let components = NSURLComponents(string: "http://derrickho.co.nf/skills.html")!
+		components.queryItems = [
+			NSURLQueryItem(name: "snoozeMSG", value: message)
+		]
+		let content = FBSDKShareLinkContent()
+		content.contentURL = NSURL(string: "https://www.facebook.com")//components.URL!
+		content.contentDescription = message
+		FBSDKShareDialog.showFromViewController(activeAlarmVC, withContent: content, delegate: activeAlarmVC)
+		print(message)
+		print(components)
+	}
+	
+}
+
+extension EACActiveAlarmViewController: FBSDKSharingDelegate {
+	
+	func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+		
+	}
+	
+	func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
+		
+	}
+	
+	func sharerDidCancel(sharer: FBSDKSharing!) {
 		
 	}
 	
@@ -634,7 +827,8 @@ class EACAudioManager: NSObject, AVAudioPlayerDelegate {
 		
 		var audioPlayer = AVAudioPlayer()
 		var repeats = 0
-		
+		var isPlaying = false
+		var stoppedPlaying = { (becauseAutoSnooze: Bool) -> () in }
 		// MARK: AVAudioPlayerDelegate
 		func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
 			playAudio()
@@ -642,17 +836,30 @@ class EACAudioManager: NSObject, AVAudioPlayerDelegate {
 		
 		func playAudio() {
 			if repeats > 0 {
-				self.audioPlayer.play()
+				repeats -= 1
+				isPlaying = self.audioPlayer.play()
+			} else {
+				isPlaying = false
+				if repeats == 0 {
+					stoppedPlaying(true)
+				} else if repeats == -1 {
+					stoppedPlaying(false)
+				}
 			}
-			repeats -= 1
 		}
 		
 		func snooze() {
-			
+			repeats = -1
+			if isPlaying {
+				self.audioPlayer.stop()
+			}
 		}
 		
 		func stop() {
-			
+			repeats = -1
+			if isPlaying {
+				self.audioPlayer.stop()
+			}
 		}
 	}
 	
