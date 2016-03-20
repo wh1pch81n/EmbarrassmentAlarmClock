@@ -287,6 +287,12 @@ The alarm clock that lets your friends know you're a moron.</string>
                                     <action selector="tappedSnooze:" destination="DaS-vM-CTh" eventType="touchUpInside" id="LsF-xb-pE7"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe right to turn off alarm &gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDH-Jd-Oz7">
+                                <rect key="frame" x="16" y="527" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -297,7 +303,10 @@ The alarm clock that lets your friends know you're a moron.</string>
                             <constraint firstItem="Lk3-7Q-chk" firstAttribute="top" secondItem="DEm-XO-sKA" secondAttribute="bottom" constant="40" id="XBL-fw-W8x"/>
                             <constraint firstItem="e7d-p6-EWO" firstAttribute="leading" secondItem="act-aX-ske" secondAttribute="leadingMargin" id="f3L-XH-KrR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="e7d-p6-EWO" secondAttribute="trailing" id="lSE-Y0-Jbc"/>
+                            <constraint firstItem="nDH-Jd-Oz7" firstAttribute="leading" secondItem="act-aX-ske" secondAttribute="leadingMargin" id="lpn-TU-0GE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nDH-Jd-Oz7" secondAttribute="trailing" id="mKV-bf-uZP"/>
                             <constraint firstItem="cjA-3s-ZBw" firstAttribute="top" secondItem="ICP-Nr-HBt" secondAttribute="bottom" constant="80" id="qBy-su-Npr"/>
+                            <constraint firstItem="cjA-3s-ZBw" firstAttribute="top" secondItem="nDH-Jd-Oz7" secondAttribute="bottom" constant="20" id="qyM-M8-iFP"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
