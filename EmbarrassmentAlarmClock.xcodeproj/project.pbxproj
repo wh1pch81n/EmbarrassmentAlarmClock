@@ -16,6 +16,20 @@
 		2FCCEEBA1C94ED4900532E24 /* EmbarrassmentAlarmClockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCEEB91C94ED4900532E24 /* EmbarrassmentAlarmClockTests.swift */; };
 		2FCCEEC51C94EE3200532E24 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCCEEC41C94EE3200532E24 /* FBSDKCoreKit.framework */; };
 		2FCCEECB1C95006800532E24 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCCEECA1C95006800532E24 /* FBSDKLoginKit.framework */; };
+		2FD62EE31C9CE32100EB7D1E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD62EE21C9CE32100EB7D1E /* FBSDKShareKit.framework */; };
+		2FD62EE51C9DD4FD00EB7D1E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD62EE41C9DD4FD00EB7D1E /* Social.framework */; };
+		2FD62EE71C9DF0A800EB7D1E /* EACCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EE61C9DF0A800EB7D1E /* EACCommon.swift */; };
+		2FD62EE91C9DF6F100EB7D1E /* EACChildViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EE81C9DF6F100EB7D1E /* EACChildViewControllerDelegate.swift */; };
+		2FD62EEB1C9DF74A00EB7D1E /* EACLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EEA1C9DF74A00EB7D1E /* EACLoginViewController.swift */; };
+		2FD62EED1C9DF78600EB7D1E /* EACStartAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EEC1C9DF78600EB7D1E /* EACStartAlarmViewController.swift */; };
+		2FD62EEF1C9DF7BA00EB7D1E /* EACSetAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EEE1C9DF7BA00EB7D1E /* EACSetAlarmViewController.swift */; };
+		2FD62EF11C9E040500EB7D1E /* EACActiveAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EF01C9E040500EB7D1E /* EACActiveAlarmViewController.swift */; };
+		2FD62EF31C9E04A500EB7D1E /* EACAlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EF21C9E04A500EB7D1E /* EACAlarmManager.swift */; };
+		2FD62EF51C9E050000EB7D1E /* EACCircleAnimatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EF41C9E050000EB7D1E /* EACCircleAnimatorManager.swift */; };
+		2FD62EF71C9E054100EB7D1E /* EACContextTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EF61C9E054100EB7D1E /* EACContextTransitioning.swift */; };
+		2FD62EF91C9E059D00EB7D1E /* EACCircleAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EF81C9E059D00EB7D1E /* EACCircleAnimator.swift */; };
+		2FD62EFB1C9E05F400EB7D1E /* EACAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EFA1C9E05F400EB7D1E /* EACAudioManager.swift */; };
+		2FD62EFD1C9E064800EB7D1E /* EACPostFacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EFC1C9E064800EB7D1E /* EACPostFacebookViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +44,7 @@
 
 /* Begin PBXFileReference section */
 		2F685B331C9795BB009F04E2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		2FCCEEA11C94ED4900532E24 /* EmbarrassmentAlarmClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmbarrassmentAlarmClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FCCEEA11C94ED4900532E24 /* WTFU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WTFU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCCEEA41C94ED4900532E24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCCEEA61C94ED4900532E24 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2FCCEEA91C94ED4900532E24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -44,6 +58,20 @@
 		2FCCEEC71C94EF9000532E24 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		2FCCEEC81C94F0BF00532E24 /* EmbarrassmentAlarmClock-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmbarrassmentAlarmClock-Bridging-Header.h"; sourceTree = "<group>"; };
 		2FCCEECA1C95006800532E24 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		2FD62EE21C9CE32100EB7D1E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		2FD62EE41C9DD4FD00EB7D1E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		2FD62EE61C9DF0A800EB7D1E /* EACCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACCommon.swift; sourceTree = "<group>"; };
+		2FD62EE81C9DF6F100EB7D1E /* EACChildViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACChildViewControllerDelegate.swift; sourceTree = "<group>"; };
+		2FD62EEA1C9DF74A00EB7D1E /* EACLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACLoginViewController.swift; sourceTree = "<group>"; };
+		2FD62EEC1C9DF78600EB7D1E /* EACStartAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACStartAlarmViewController.swift; sourceTree = "<group>"; };
+		2FD62EEE1C9DF7BA00EB7D1E /* EACSetAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACSetAlarmViewController.swift; sourceTree = "<group>"; };
+		2FD62EF01C9E040500EB7D1E /* EACActiveAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACActiveAlarmViewController.swift; sourceTree = "<group>"; };
+		2FD62EF21C9E04A500EB7D1E /* EACAlarmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACAlarmManager.swift; sourceTree = "<group>"; };
+		2FD62EF41C9E050000EB7D1E /* EACCircleAnimatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACCircleAnimatorManager.swift; sourceTree = "<group>"; };
+		2FD62EF61C9E054100EB7D1E /* EACContextTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACContextTransitioning.swift; sourceTree = "<group>"; };
+		2FD62EF81C9E059D00EB7D1E /* EACCircleAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACCircleAnimator.swift; sourceTree = "<group>"; };
+		2FD62EFA1C9E05F400EB7D1E /* EACAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACAudioManager.swift; sourceTree = "<group>"; };
+		2FD62EFC1C9E064800EB7D1E /* EACPostFacebookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EACPostFacebookViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +79,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FD62EE51C9DD4FD00EB7D1E /* Social.framework in Frameworks */,
+				2FD62EE31C9CE32100EB7D1E /* FBSDKShareKit.framework in Frameworks */,
 				2F685B341C9795BB009F04E2 /* AudioToolbox.framework in Frameworks */,
 				2FCCEECB1C95006800532E24 /* FBSDKLoginKit.framework in Frameworks */,
 				2FCCEEC51C94EE3200532E24 /* FBSDKCoreKit.framework in Frameworks */,
@@ -70,6 +100,8 @@
 		2FCCEE981C94ED4900532E24 = {
 			isa = PBXGroup;
 			children = (
+				2FD62EE41C9DD4FD00EB7D1E /* Social.framework */,
+				2FD62EE21C9CE32100EB7D1E /* FBSDKShareKit.framework */,
 				2F685B331C9795BB009F04E2 /* AudioToolbox.framework */,
 				2FCCEEC41C94EE3200532E24 /* FBSDKCoreKit.framework */,
 				2FCCEECA1C95006800532E24 /* FBSDKLoginKit.framework */,
@@ -82,7 +114,7 @@
 		2FCCEEA21C94ED4900532E24 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FCCEEA11C94ED4900532E24 /* EmbarrassmentAlarmClock.app */,
+				2FCCEEA11C94ED4900532E24 /* WTFU.app */,
 				2FCCEEB51C94ED4900532E24 /* EmbarrassmentAlarmClockTests.xctest */,
 			);
 			name = Products;
@@ -94,6 +126,18 @@
 				2FCCEEC61C94EF7100532E24 /* Configuration */,
 				2FCCEEA41C94ED4900532E24 /* AppDelegate.swift */,
 				2FCCEEA61C94ED4900532E24 /* ViewController.swift */,
+				2FD62EFA1C9E05F400EB7D1E /* EACAudioManager.swift */,
+				2FD62EF81C9E059D00EB7D1E /* EACCircleAnimator.swift */,
+				2FD62EF61C9E054100EB7D1E /* EACContextTransitioning.swift */,
+				2FD62EF41C9E050000EB7D1E /* EACCircleAnimatorManager.swift */,
+				2FD62EF21C9E04A500EB7D1E /* EACAlarmManager.swift */,
+				2FD62EF01C9E040500EB7D1E /* EACActiveAlarmViewController.swift */,
+				2FD62EEE1C9DF7BA00EB7D1E /* EACSetAlarmViewController.swift */,
+				2FD62EEC1C9DF78600EB7D1E /* EACStartAlarmViewController.swift */,
+				2FD62EEA1C9DF74A00EB7D1E /* EACLoginViewController.swift */,
+				2FD62EE81C9DF6F100EB7D1E /* EACChildViewControllerDelegate.swift */,
+				2FD62EE61C9DF0A800EB7D1E /* EACCommon.swift */,
+				2FD62EFC1C9E064800EB7D1E /* EACPostFacebookViewController.swift */,
 				2FCCEEC91C94FD6C00532E24 /* Networking */,
 				2FCCEEA81C94ED4900532E24 /* Main.storyboard */,
 				2FCCEEAB1C94ED4900532E24 /* Assets.xcassets */,
@@ -131,9 +175,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2FCCEEA01C94ED4900532E24 /* EmbarrassmentAlarmClock */ = {
+		2FCCEEA01C94ED4900532E24 /* WTFU */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2FCCEEBE1C94ED4900532E24 /* Build configuration list for PBXNativeTarget "EmbarrassmentAlarmClock" */;
+			buildConfigurationList = 2FCCEEBE1C94ED4900532E24 /* Build configuration list for PBXNativeTarget "WTFU" */;
 			buildPhases = (
 				2FCCEE9D1C94ED4900532E24 /* Sources */,
 				2FCCEE9E1C94ED4900532E24 /* Frameworks */,
@@ -143,9 +187,9 @@
 			);
 			dependencies = (
 			);
-			name = EmbarrassmentAlarmClock;
+			name = WTFU;
 			productName = EmbarrassmentAlarmClock;
-			productReference = 2FCCEEA11C94ED4900532E24 /* EmbarrassmentAlarmClock.app */;
+			productReference = 2FCCEEA11C94ED4900532E24 /* WTFU.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2FCCEEB41C94ED4900532E24 /* EmbarrassmentAlarmClockTests */ = {
@@ -198,7 +242,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2FCCEEA01C94ED4900532E24 /* EmbarrassmentAlarmClock */,
+				2FCCEEA01C94ED4900532E24 /* WTFU */,
 				2FCCEEB41C94ED4900532E24 /* EmbarrassmentAlarmClockTests */,
 			);
 		};
@@ -229,7 +273,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FD62EF91C9E059D00EB7D1E /* EACCircleAnimator.swift in Sources */,
+				2FD62EF71C9E054100EB7D1E /* EACContextTransitioning.swift in Sources */,
+				2FD62EE71C9DF0A800EB7D1E /* EACCommon.swift in Sources */,
+				2FD62EEF1C9DF7BA00EB7D1E /* EACSetAlarmViewController.swift in Sources */,
+				2FD62EF51C9E050000EB7D1E /* EACCircleAnimatorManager.swift in Sources */,
+				2FD62EED1C9DF78600EB7D1E /* EACStartAlarmViewController.swift in Sources */,
+				2FD62EFD1C9E064800EB7D1E /* EACPostFacebookViewController.swift in Sources */,
 				2FCCEEA71C94ED4900532E24 /* ViewController.swift in Sources */,
+				2FD62EEB1C9DF74A00EB7D1E /* EACLoginViewController.swift in Sources */,
+				2FD62EE91C9DF6F100EB7D1E /* EACChildViewControllerDelegate.swift in Sources */,
+				2FD62EFB1C9E05F400EB7D1E /* EACAudioManager.swift in Sources */,
+				2FD62EF31C9E04A500EB7D1E /* EACAlarmManager.swift in Sources */,
+				2FD62EF11C9E040500EB7D1E /* EACActiveAlarmViewController.swift in Sources */,
 				2FCCEEA51C94ED4900532E24 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,7 +303,7 @@
 /* Begin PBXTargetDependency section */
 		2FCCEEB71C94ED4900532E24 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2FCCEEA01C94ED4900532E24 /* EmbarrassmentAlarmClock */;
+			target = 2FCCEEA01C94ED4900532E24 /* WTFU */;
 			targetProxy = 2FCCEEB61C94ED4900532E24 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -421,7 +477,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2FCCEEBE1C94ED4900532E24 /* Build configuration list for PBXNativeTarget "EmbarrassmentAlarmClock" */ = {
+		2FCCEEBE1C94ED4900532E24 /* Build configuration list for PBXNativeTarget "WTFU" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FCCEEBF1C94ED4900532E24 /* Debug */,
