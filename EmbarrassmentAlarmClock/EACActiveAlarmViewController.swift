@@ -89,13 +89,8 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewControllerProt
 	}
 	
 	@IBAction func stopAlarm(sender: AnyObject) {
-		switch EACAlarmManager.sharedInstance.alarmState {
-		case .Ringing, .Snooze:
-			postFacebookVC.snoozeAmount = EACAlarmManager.sharedInstance.numOfSnoozes()
-		default:()
-		}
-		EACAlarmManager.sharedInstance.stopAlarm()
 		eacChildViewControllerDelegate.transitionToNextVC(self)
+		EACAlarmManager.sharedInstance.stopAlarm()
 	}
 	
 }

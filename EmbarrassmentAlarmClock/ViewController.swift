@@ -8,28 +8,24 @@
 
 import UIKit
 
-
-
-let facebookLoginVC = viewControllerFromType(EACLoginViewController) as! EACLoginViewController
-let startAlarmVC = viewControllerFromType(EACStartAlarmViewController) as!EACStartAlarmViewController
-let setAlarmVC = viewControllerFromType(EACSetAlarmViewController) as! EACSetAlarmViewController
-let activeAlarmVC = viewControllerFromType(EACActiveAlarmViewController) as! EACActiveAlarmViewController
-let postFacebookVC = viewControllerFromType(EACPostFacebookViewController) as! EACPostFacebookViewController
-
-
-
 class ViewController: UIViewController, EACChildViewControllerDelegate {
-	
+
+	let facebookLoginVC = viewControllerFromType(EACLoginViewController) as! EACLoginViewController
+	let startAlarmVC = viewControllerFromType(EACStartAlarmViewController) as!EACStartAlarmViewController
+	let setAlarmVC = viewControllerFromType(EACSetAlarmViewController) as! EACSetAlarmViewController
+	let activeAlarmVC = viewControllerFromType(EACActiveAlarmViewController) as! EACActiveAlarmViewController
+	let postFacebookVC = viewControllerFromType(EACPostFacebookViewController) as! EACPostFacebookViewController
+
 	@IBOutlet weak var contentView: UIView!
 	@IBOutlet weak var containerViewButtons: UIView!
 	
 	/**Returns a UIViewController if there is some presets that user needs to do before the app will work properly*/
 	var presetViewController: UIViewController? {
-//		let accessToken = FBSDKAccessToken.currentAccessToken()
-//		if accessToken == nil {
-//			// Needs Facebook login
-//			return facebookLoginVC
-//		}
+		let accessToken = FBSDKAccessToken.currentAccessToken()
+		if accessToken == nil {
+			// Needs Facebook login
+			return facebookLoginVC
+		}
 		// volume is too low
 		
 		// Silent Mode is on
@@ -115,7 +111,7 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 		let nextVC: UIViewController!
 		var animator: ((animator: UIViewControllerAnimatedTransitioning) -> ())? = nil
 		
-		let animatorEACCircle = { (centerPoint centerPoint: CGPoint) -> (animator: UIViewControllerAnimatedTransitioning) -> () in
+		let animatorEACCircle = { (centerPoint: CGPoint) -> (animator: UIViewControllerAnimatedTransitioning) -> () in
 			return { (animator: UIViewControllerAnimatedTransitioning) -> () in
 				if let _animator = animator as? EACCircleAnimator {
 					_animator.centerPoint = centerPoint
@@ -134,16 +130,22 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 			}
 		case startAlarmVC:
 			nextVC = setAlarmVC
-			animator = animatorEACCircle(centerPoint: startAlarmVC.startButton.center)
+			animator = animatorEACCircle(startAlarmVC.startButton.center)
 		case setAlarmVC:
 			nextVC = activeAlarmVC
-			animator = animatorEACCircle(centerPoint: setAlarmVC.alarmTimeButton.center)
+			animator = animatorEACCircle(setAlarmVC.alarmTimeButton.center)
 		case activeAlarmVC:
-			nextVC = postFacebookVC
-			animator = animatorEACCircle(centerPoint: CGPoint(x: activeAlarmVC.view.frame.midX, y: activeAlarmVC.view.frame.maxY))
+			switch EACAlarmManager.sharedInstance.alarmState {
+			case .Ringing, .Snooze:
+				postFacebookVC.snoozeAmount = EACAlarmManager.sharedInstance.numOfSnoozes()
+				nextVC = postFacebookVC
+			default:
+				nextVC = startAlarmVC
+			}
+			animator = animatorEACCircle(CGPoint(x: activeAlarmVC.view.frame.midX, y: activeAlarmVC.view.frame.maxY))
 		case postFacebookVC:
 			nextVC = startAlarmVC
-			animator = animatorEACCircle(centerPoint: CGPoint(x: activeAlarmVC.view.frame.minX, y: activeAlarmVC.view.frame.maxY))
+			animator = animatorEACCircle(CGPoint(x: activeAlarmVC.view.frame.minX, y: activeAlarmVC.view.frame.maxY))
 		default:
 			return
 		}

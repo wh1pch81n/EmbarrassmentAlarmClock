@@ -8,6 +8,12 @@
 
 import UIKit
 
+let FB_PUBLISH_ACTIONS = "publish_actions"
+let FB_GRAPHPATH_FEED = "me/feed"
+let FB_GRAPHPATH_FEED_MESSAGE_KEY = "message"
+
+let POST = "POST"
+
 enum ImageAsset: String {
 	case Facebook_F_icon = "Facebook-F-icon"
 	
