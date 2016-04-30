@@ -14,10 +14,7 @@ class EACSetAlarmViewController: UIViewController, EACChildViewControllerProtoco
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
 	
 	let chosenDateKey = "chosen_date_key"
-	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return UIStatusBarStyle.Default
-	}
+	var statusBarImageView: UIImageView!
 	
 	override func loadView() {
 		super.loadView()
@@ -25,6 +22,9 @@ class EACSetAlarmViewController: UIViewController, EACChildViewControllerProtoco
 		let maskShape = CAShapeLayer()
 		maskShape.path = circle.CGPath
 		alarmTimeButton.layer.mask = maskShape
+		statusBarImageView = UIImageView(frame: UIApplication.statusBarView.bounds)
+		view.addSubview(statusBarImageView)
+		statusBarImageView.hidden = true;
 	}
 	
 	@IBAction func tappedAlarmTimeButton(sender: AnyObject) {

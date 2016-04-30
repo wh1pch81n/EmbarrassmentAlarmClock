@@ -34,15 +34,17 @@ func constrainSubview(view: UIView, toSuperView superView: UIView) {
 	view.trailingAnchor.constraintEqualToAnchor(superView.trailingAnchor).active = true
 }
 
-func viewToImage(view: UIView) -> UIImage {
-	var viewImage: UIImage
-	UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0)
-	view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-	
-	viewImage = UIGraphicsGetImageFromCurrentImageContext()
-	UIGraphicsEndImageContext()
-	
-	return viewImage
+extension UIView {
+	func viewToImage() -> UIImage {
+		var viewImage: UIImage
+		UIGraphicsBeginImageContextWithOptions(bounds.size, opaque, 0.0)
+		layer.renderInContext(UIGraphicsGetCurrentContext()!)
+		
+		viewImage = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		
+		return viewImage
+	}
 }
 
 extension CGPoint {
@@ -50,3 +52,18 @@ extension CGPoint {
 		return sqrt(pow(self.x - p.x, 2) + pow(self.y - p.y, 2))
 	}
 }
+
+extension UIApplication {
+	static var statusBarView: UIView {
+//			UIView *subViewWindow = [[UIApplication sharedApplication] valueForKey:@"statusBarWindow"];
+//			for (UIView *i in subViewWindow.subviews) {
+//				if ([i isKindOfClass:NSClassFromString(@"UIStatusBar")]) {
+//					return i;
+//				}
+//			}
+//			return nil;
+//		}
+	return UIApplication.sharedApplication().valueForKey("statusBarWindow")!.subviews[0]
+	}
+}
+

@@ -12,7 +12,8 @@ class EACCircleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 	var centerPoint = CGPoint.zero
 	var centerRadius = CGFloat(0)
 	var isPresenting: Bool
-	var duration = NSTimeInterval(0.7)
+	var duration = NSTimeInterval(5)//NSTimeInterval(0.7)
+	var didFinishAnimation = { () -> () in }
 	
 	init(isPresenting: Bool) {
 		self.isPresenting = isPresenting
@@ -27,7 +28,8 @@ class EACCircleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 		
 		let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
 		let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-		
+		toVC.view.userInteractionEnabled = false
+		fromVC.view.userInteractionEnabled = false
 		if isPresenting {
 			transitionContext.containerView()!.addSubview(toVC.view)
 		}
@@ -102,11 +104,14 @@ class EACCircleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 	func animationEnded(transitionCompleted: Bool) {
 		let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
 		let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+		toVC.view.userInteractionEnabled = true
+		fromVC.view.userInteractionEnabled = true
 		if isPresenting {
 			toVC.view.layer.mask = nil
 		} else {
 			fromVC.view.layer.mask = nil
 		}
+		dispatch_async(dispatch_get_main_queue(), didFinishAnimation)
 	}
 	
 }

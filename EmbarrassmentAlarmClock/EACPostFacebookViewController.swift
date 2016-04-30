@@ -11,6 +11,7 @@ class EACPostFacebookViewController: UIViewController, EACChildViewControllerPro
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
 	var snoozeAmount = 0
 	@IBOutlet var imageView: UIImageView!
+	var statusBarImageView: UIImageView!
 	
 	@IBAction func tappedPostToFacebook(sender: AnyObject) {
 //				let accessToken = FBSDKAccessToken.currentAccessToken()
@@ -60,7 +61,7 @@ class EACPostFacebookViewController: UIViewController, EACChildViewControllerPro
 		let size = label.sizeThatFits(CGSize(width: 150, height: 0))
 		label.frame.size = size
 		
-		return viewToImage(label)
+		return label.viewToImage()
 	}
 	
 	@IBAction func tappedCancel(sender: AnyObject) {

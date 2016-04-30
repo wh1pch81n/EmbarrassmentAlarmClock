@@ -12,10 +12,7 @@ class EACStartAlarmViewController: UIViewController, EACChildViewControllerProto
 	
 	@IBOutlet weak var startButton: UIButton!
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
-	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return UIStatusBarStyle.LightContent
-	}
+	var statusBarImageView: UIImageView!
 	
 	override func loadView() {
 		super.loadView()

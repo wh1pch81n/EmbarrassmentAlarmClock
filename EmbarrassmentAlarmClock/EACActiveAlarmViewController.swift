@@ -12,8 +12,9 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewControllerProt
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
 	
 	@IBOutlet weak var alarmSetLabel: UILabel!
-	
 	@IBOutlet weak var snoozeCount: UIButton!
+	var statusBarImageView: UIImageView!
+
 	
 	override func loadView() {
 		super.loadView()
@@ -23,7 +24,7 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewControllerProt
 		snoozeCount.layer.mask = maskShape
 		
 		self.view.addGestureRecognizer({
-			let g = UISwipeGestureRecognizer(target: self, action: "stopAlarm:")
+			let g = UISwipeGestureRecognizer(target: self, action: #selector(EACActiveAlarmViewController.stopAlarm(_:)))
 			g.direction = UISwipeGestureRecognizerDirection.Right
 			return g
 			}())
@@ -60,10 +61,6 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewControllerProt
 		NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidBecomeActiveNotification, object: nil, queue: nil) { (n: NSNotification) -> Void in
 			self.updateSnoozeButton()
 		}
-	}
-	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return UIStatusBarStyle.LightContent
 	}
 	
 	override func viewWillAppear(animated: Bool) {
