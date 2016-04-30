@@ -10,11 +10,11 @@ import UIKit
 
 class ViewController: UIViewController, EACChildViewControllerDelegate {
 
-	let facebookLoginVC = viewControllerFromType(EACLoginViewController) as! EACLoginViewController
-	let startAlarmVC = viewControllerFromType(EACStartAlarmViewController) as!EACStartAlarmViewController
-	let setAlarmVC = viewControllerFromType(EACSetAlarmViewController) as! EACSetAlarmViewController
-	let activeAlarmVC = viewControllerFromType(EACActiveAlarmViewController) as! EACActiveAlarmViewController
-	let postFacebookVC = viewControllerFromType(EACPostFacebookViewController) as! EACPostFacebookViewController
+	let facebookLoginVC = viewControllerFromType(EACLoginViewController)
+	let startAlarmVC = viewControllerFromType(EACStartAlarmViewController)
+	let setAlarmVC = viewControllerFromType(EACSetAlarmViewController)
+	let activeAlarmVC = viewControllerFromType(EACActiveAlarmViewController)
+	let postFacebookVC = viewControllerFromType(EACPostFacebookViewController)
 
 	@IBOutlet weak var contentView: UIView!
 	@IBOutlet weak var containerViewButtons: UIView!

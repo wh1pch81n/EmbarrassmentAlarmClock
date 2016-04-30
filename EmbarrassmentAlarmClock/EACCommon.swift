@@ -22,12 +22,8 @@ enum ImageAsset: String {
 	}
 }
 
-func typeAsString<T>(type: T.Type) -> String {
-	return "\(type)".componentsSeparatedByString(".").last!
-}
-
-func viewControllerFromType<T>(vc: T.Type) -> UIViewController {
-	return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(typeAsString(vc))
+func viewControllerFromType<T>(vc: T.Type) -> T {
+	return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(String(vc)) as! T
 }
 
 func constrainSubview(view: UIView, toSuperView superView: UIView) {

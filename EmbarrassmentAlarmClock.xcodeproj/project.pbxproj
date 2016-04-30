@@ -14,7 +14,6 @@
 		2FCCEEAA1C94ED4900532E24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCCEEA81C94ED4900532E24 /* Main.storyboard */; };
 		2FCCEEAC1C94ED4900532E24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCCEEAB1C94ED4900532E24 /* Assets.xcassets */; };
 		2FCCEEAF1C94ED4900532E24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCCEEAD1C94ED4900532E24 /* LaunchScreen.storyboard */; };
-		2FCCEEBA1C94ED4900532E24 /* EmbarrassmentAlarmClockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCEEB91C94ED4900532E24 /* EmbarrassmentAlarmClockTests.swift */; };
 		2FCCEEC51C94EE3200532E24 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCCEEC41C94EE3200532E24 /* FBSDKCoreKit.framework */; };
 		2FCCEECB1C95006800532E24 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCCEECA1C95006800532E24 /* FBSDKLoginKit.framework */; };
 		2FD62EE31C9CE32100EB7D1E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD62EE21C9CE32100EB7D1E /* FBSDKShareKit.framework */; };
@@ -33,16 +32,6 @@
 		2FD62EFD1C9E064800EB7D1E /* EACPostFacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD62EFC1C9E064800EB7D1E /* EACPostFacebookViewController.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2FCCEEB61C94ED4900532E24 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2FCCEE991C94ED4900532E24 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2FCCEEA01C94ED4900532E24;
-			remoteInfo = EmbarrassmentAlarmClock;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		2F3C9B791CB1FF4300E1A688 /* Lato-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Hairline.ttf"; path = "../../../Downloads/Lato_Hairline/Lato-Hairline.ttf"; sourceTree = "<group>"; };
 		2F685B331C9795BB009F04E2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -53,9 +42,6 @@
 		2FCCEEAB1C94ED4900532E24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FCCEEAE1C94ED4900532E24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2FCCEEB01C94ED4900532E24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2FCCEEB51C94ED4900532E24 /* EmbarrassmentAlarmClockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmbarrassmentAlarmClockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2FCCEEB91C94ED4900532E24 /* EmbarrassmentAlarmClockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbarrassmentAlarmClockTests.swift; sourceTree = "<group>"; };
-		2FCCEEBB1C94ED4900532E24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FCCEEC41C94EE3200532E24 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../FacebookSDKs-iOS-20160210/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		2FCCEEC81C94F0BF00532E24 /* EmbarrassmentAlarmClock-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmbarrassmentAlarmClock-Bridging-Header.h"; sourceTree = "<group>"; };
 		2FCCEECA1C95006800532E24 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -88,13 +74,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2FCCEEB21C94ED4900532E24 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -107,7 +86,6 @@
 				2FCCEEC41C94EE3200532E24 /* FBSDKCoreKit.framework */,
 				2FCCEECA1C95006800532E24 /* FBSDKLoginKit.framework */,
 				2FCCEEA31C94ED4900532E24 /* EmbarrassmentAlarmClock */,
-				2FCCEEB81C94ED4900532E24 /* EmbarrassmentAlarmClockTests */,
 				2FCCEEA21C94ED4900532E24 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				2FCCEEA11C94ED4900532E24 /* WTFU.app */,
-				2FCCEEB51C94ED4900532E24 /* EmbarrassmentAlarmClockTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,15 +125,6 @@
 			path = EmbarrassmentAlarmClock;
 			sourceTree = "<group>";
 		};
-		2FCCEEB81C94ED4900532E24 /* EmbarrassmentAlarmClockTests */ = {
-			isa = PBXGroup;
-			children = (
-				2FCCEEB91C94ED4900532E24 /* EmbarrassmentAlarmClockTests.swift */,
-				2FCCEEBB1C94ED4900532E24 /* Info.plist */,
-			);
-			path = EmbarrassmentAlarmClockTests;
-			sourceTree = "<group>";
-		};
 		2FCCEEC91C94FD6C00532E24 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,24 +154,6 @@
 			productReference = 2FCCEEA11C94ED4900532E24 /* WTFU.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2FCCEEB41C94ED4900532E24 /* EmbarrassmentAlarmClockTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2FCCEEC11C94ED4900532E24 /* Build configuration list for PBXNativeTarget "EmbarrassmentAlarmClockTests" */;
-			buildPhases = (
-				2FCCEEB11C94ED4900532E24 /* Sources */,
-				2FCCEEB21C94ED4900532E24 /* Frameworks */,
-				2FCCEEB31C94ED4900532E24 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2FCCEEB71C94ED4900532E24 /* PBXTargetDependency */,
-			);
-			name = EmbarrassmentAlarmClockTests;
-			productName = EmbarrassmentAlarmClockTests;
-			productReference = 2FCCEEB51C94ED4900532E24 /* EmbarrassmentAlarmClockTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -216,10 +166,15 @@
 				TargetAttributes = {
 					2FCCEEA01C94ED4900532E24 = {
 						CreatedOnToolsVersion = 7.2.1;
-					};
-					2FCCEEB41C94ED4900532E24 = {
-						CreatedOnToolsVersion = 7.2.1;
-						TestTargetID = 2FCCEEA01C94ED4900532E24;
+						DevelopmentTeam = SX585CK9M9;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -237,7 +192,6 @@
 			projectRoot = "";
 			targets = (
 				2FCCEEA01C94ED4900532E24 /* WTFU */,
-				2FCCEEB41C94ED4900532E24 /* EmbarrassmentAlarmClockTests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,13 +205,6 @@
 				2FCCEEAC1C94ED4900532E24 /* Assets.xcassets in Resources */,
 				2F3C9B7A1CB1FF4300E1A688 /* Lato-Hairline.ttf in Resources */,
 				2FCCEEAA1C94ED4900532E24 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2FCCEEB31C94ED4900532E24 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,23 +249,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2FCCEEB11C94ED4900532E24 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2FCCEEBA1C94ED4900532E24 /* EmbarrassmentAlarmClockTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2FCCEEB71C94ED4900532E24 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2FCCEEA01C94ED4900532E24 /* WTFU */;
-			targetProxy = 2FCCEEB61C94ED4900532E24 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2FCCEEA81C94ED4900532E24 /* Main.storyboard */ = {
@@ -447,30 +378,6 @@
 			};
 			name = Release;
 		};
-		2FCCEEC21C94ED4900532E24 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = EmbarrassmentAlarmClockTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dnthome.EmbarrassmentAlarmClockTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EmbarrassmentAlarmClock.app/EmbarrassmentAlarmClock";
-			};
-			name = Debug;
-		};
-		2FCCEEC31C94ED4900532E24 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = EmbarrassmentAlarmClockTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dnthome.EmbarrassmentAlarmClockTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EmbarrassmentAlarmClock.app/EmbarrassmentAlarmClock";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -488,15 +395,6 @@
 			buildConfigurations = (
 				2FCCEEBF1C94ED4900532E24 /* Debug */,
 				2FCCEEC01C94ED4900532E24 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2FCCEEC11C94ED4900532E24 /* Build configuration list for PBXNativeTarget "EmbarrassmentAlarmClockTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2FCCEEC21C94ED4900532E24 /* Debug */,
-				2FCCEEC31C94ED4900532E24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
