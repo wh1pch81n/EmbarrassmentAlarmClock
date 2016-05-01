@@ -19,7 +19,7 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 	@IBOutlet weak var contentView: UIView!
 	@IBOutlet weak var containerViewButtons: UIView!
 	@IBOutlet weak var facebookButton: UIImageView!
-	
+	  
 	/**Returns a UIViewController if there is some presets that user needs to do before the app will work properly*/
 	var presetViewController: UIViewController? {
 		let accessToken = FBSDKAccessToken.currentAccessToken()
