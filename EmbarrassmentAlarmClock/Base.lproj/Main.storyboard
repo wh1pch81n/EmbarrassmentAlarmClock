@@ -53,7 +53,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="UWg-4j-SGf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Ieg-0o-BwD"/>
-                            <constraint firstItem="UWg-4j-SGf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="KUI-0G-dn1"/>
+                            <constraint firstItem="UWg-4j-SGf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="KUI-0G-dn1"/>
                             <constraint firstItem="vxx-gb-n7K" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="20" id="YAk-ac-SE7"/>
                             <constraint firstItem="vxx-gb-n7K" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aSq-BH-4QZ"/>
                             <constraint firstAttribute="trailing" secondItem="vxx-gb-n7K" secondAttribute="trailing" id="cJo-gy-kRa"/>
@@ -107,7 +107,7 @@ Otherwise it is just another stupid alarm clock app, stupid</string>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="3vC-rM-W6h" firstAttribute="top" secondItem="6ua-0r-yFb" secondAttribute="bottom" constant="60" id="6xS-QT-efs"/>
+                            <constraint firstItem="3vC-rM-W6h" firstAttribute="top" secondItem="HwK-xE-xgd" secondAttribute="topMargin" constant="80" id="6uD-Pt-pmJ"/>
                             <constraint firstItem="3vC-rM-W6h" firstAttribute="leading" secondItem="HwK-xE-xgd" secondAttribute="leadingMargin" id="7YT-je-w38"/>
                             <constraint firstItem="roX-dv-mTU" firstAttribute="top" secondItem="3vC-rM-W6h" secondAttribute="bottom" constant="20" id="97F-EB-EHR"/>
                             <constraint firstItem="roX-dv-mTU" firstAttribute="leading" secondItem="HwK-xE-xgd" secondAttribute="leadingMargin" constant="20" id="C63-Dm-nPu"/>
@@ -240,8 +240,8 @@ The alarm clock that lets your friends know you're a moron.</string>
                             <constraint firstItem="VI8-Ww-9DG" firstAttribute="top" secondItem="8QS-Mk-Zzs" secondAttribute="bottom" constant="70" id="Yn2-jR-ynD"/>
                             <constraint firstItem="TJQ-LT-8pN" firstAttribute="top" secondItem="biI-m7-XDb" secondAttribute="bottom" constant="8" id="a48-v9-tJQ"/>
                             <constraint firstItem="biI-m7-XDb" firstAttribute="leading" secondItem="AXu-7t-dYx" secondAttribute="leadingMargin" id="cn4-VT-9z7"/>
+                            <constraint firstItem="biI-m7-XDb" firstAttribute="top" secondItem="AXu-7t-dYx" secondAttribute="topMargin" constant="65" id="qo4-wP-PJr"/>
                             <constraint firstItem="TJQ-LT-8pN" firstAttribute="leading" secondItem="AXu-7t-dYx" secondAttribute="leading" id="rRh-Pf-kGE"/>
-                            <constraint firstItem="biI-m7-XDb" firstAttribute="top" secondItem="LFF-eB-iL4" secondAttribute="bottom" constant="45" id="xhd-EI-aBy"/>
                         </constraints>
                     </view>
                     <connections>
@@ -308,9 +308,9 @@ The alarm clock that lets your friends know you're a moron.</string>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="Lk3-7Q-chk" secondAttribute="trailing" id="1Gm-vb-jZ9"/>
                             <constraint firstItem="Lk3-7Q-chk" firstAttribute="leading" secondItem="act-aX-ske" secondAttribute="leadingMargin" id="3vj-qK-SAD"/>
+                            <constraint firstItem="Lk3-7Q-chk" firstAttribute="top" secondItem="act-aX-ske" secondAttribute="topMargin" constant="60" id="76q-XA-DZD"/>
                             <constraint firstItem="e7d-p6-EWO" firstAttribute="top" secondItem="Lk3-7Q-chk" secondAttribute="bottom" constant="16" id="Bft-9x-arE"/>
                             <constraint firstItem="ICP-Nr-HBt" firstAttribute="centerX" secondItem="act-aX-ske" secondAttribute="centerX" id="Rjd-8d-O1Z"/>
-                            <constraint firstItem="Lk3-7Q-chk" firstAttribute="top" secondItem="DEm-XO-sKA" secondAttribute="bottom" constant="40" id="XBL-fw-W8x"/>
                             <constraint firstItem="e7d-p6-EWO" firstAttribute="leading" secondItem="act-aX-ske" secondAttribute="leadingMargin" id="f3L-XH-KrR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="e7d-p6-EWO" secondAttribute="trailing" id="lSE-Y0-Jbc"/>
                             <constraint firstItem="nDH-Jd-Oz7" firstAttribute="leading" secondItem="act-aX-ske" secondAttribute="leadingMargin" id="lpn-TU-0GE"/>
@@ -378,10 +378,10 @@ The alarm clock that lets your friends know you're a moron.</string>
                             <constraint firstItem="C0j-bD-sSn" firstAttribute="leading" secondItem="qbm-jq-NVa" secondAttribute="trailing" constant="8" id="Hhj-Ap-DfB"/>
                             <constraint firstItem="rww-Gy-RBO" firstAttribute="top" secondItem="HyI-dw-ybe" secondAttribute="bottom" constant="20" id="NnQ-0N-pQt"/>
                             <constraint firstItem="C0j-bD-sSn" firstAttribute="centerX" secondItem="ESJ-QY-QDl" secondAttribute="centerX" id="VUF-rq-pQ6"/>
-                            <constraint firstItem="C0j-bD-sSn" firstAttribute="top" secondItem="gd3-0j-B96" secondAttribute="bottom" constant="20" id="iRz-oa-vbb"/>
                             <constraint firstItem="S1c-d2-uP4" firstAttribute="top" secondItem="C0j-bD-sSn" secondAttribute="bottom" constant="20" id="rF4-8N-lEE"/>
                             <constraint firstItem="S1c-d2-uP4" firstAttribute="trailing" secondItem="ESJ-QY-QDl" secondAttribute="trailingMargin" id="u5y-O2-MUX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HyI-dw-ybe" secondAttribute="trailing" id="u7n-JE-LUR"/>
+                            <constraint firstItem="C0j-bD-sSn" firstAttribute="top" secondItem="ESJ-QY-QDl" secondAttribute="top" constant="40" id="xp6-td-teO"/>
                         </constraints>
                     </view>
                     <connections>
