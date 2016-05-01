@@ -13,7 +13,7 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewControllerProt
 	
 	@IBOutlet weak var alarmSetLabel: UILabel!
 	@IBOutlet weak var snoozeCount: UIButton!
-	var statusBarImageView: UIImageView!
+	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.sharedApplication().statusBarFrame)
 
 	
 	override func loadView() {
@@ -29,6 +29,8 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewControllerProt
 			return g
 			}())
 		view.userInteractionEnabled = true
+		view.addSubview(statusBarImageView)
+		statusBarImageView.hidden = true
 	}
 	
 	func alarmStateDidChange(alarmState: EACAlarmState) {
@@ -88,6 +90,10 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewControllerProt
 	@IBAction func stopAlarm(sender: AnyObject) {
 		eacChildViewControllerDelegate.transitionToNextVC(self)
 		EACAlarmManager.sharedInstance.stopAlarm()
+	}
+	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return .LightContent
 	}
 	
 }

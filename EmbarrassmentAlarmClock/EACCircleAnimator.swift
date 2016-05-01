@@ -12,7 +12,7 @@ class EACCircleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 	var centerPoint = CGPoint.zero
 	var centerRadius = CGFloat(0)
 	var isPresenting: Bool
-	var duration = NSTimeInterval(5)//NSTimeInterval(0.7)
+	var duration = NSTimeInterval(0.7)
 	var didFinishAnimation = { () -> () in }
 	
 	init(isPresenting: Bool) {
@@ -30,8 +30,17 @@ class EACCircleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 		let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
 		toVC.view.userInteractionEnabled = false
 		fromVC.view.userInteractionEnabled = false
-		if isPresenting {
+		
+		if !transitionContext.containerView()!.subviews.contains(toVC.view) {
 			transitionContext.containerView()!.addSubview(toVC.view)
+		}
+		if !transitionContext.containerView()!.subviews.contains(fromVC.view) {
+			transitionContext.containerView()!.addSubview(fromVC.view)
+		}
+		if isPresenting {
+			transitionContext.containerView()!.bringSubviewToFront(toVC.view)
+		} else {
+			transitionContext.containerView()!.bringSubviewToFront(fromVC.view)
 		}
 		
 		let startMask: UIBezierPath

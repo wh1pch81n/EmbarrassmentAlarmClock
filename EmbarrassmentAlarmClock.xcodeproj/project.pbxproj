@@ -168,6 +168,9 @@
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = SX585CK9M9;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 							com.apple.GameCenter = {
 								enabled = 0;
 							};

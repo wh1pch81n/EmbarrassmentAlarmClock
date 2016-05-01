@@ -54,9 +54,9 @@
                         <constraints>
                             <constraint firstItem="UWg-4j-SGf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Ieg-0o-BwD"/>
                             <constraint firstItem="UWg-4j-SGf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="KUI-0G-dn1"/>
+                            <constraint firstItem="vxx-gb-n7K" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="20" id="YAk-ac-SE7"/>
                             <constraint firstItem="vxx-gb-n7K" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aSq-BH-4QZ"/>
                             <constraint firstAttribute="trailing" secondItem="vxx-gb-n7K" secondAttribute="trailing" id="cJo-gy-kRa"/>
-                            <constraint firstItem="vxx-gb-n7K" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hr3-DV-7kr"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UWg-4j-SGf" secondAttribute="bottom" id="jPf-ej-iXL"/>
                             <constraint firstAttribute="trailing" secondItem="UWg-4j-SGf" secondAttribute="trailing" id="rCx-ca-frI"/>
                         </constraints>
@@ -64,6 +64,7 @@
                     <connections>
                         <outlet property="containerViewButtons" destination="vxx-gb-n7K" id="lB1-RO-Ad2"/>
                         <outlet property="contentView" destination="UWg-4j-SGf" id="0VP-d1-yqh"/>
+                        <outlet property="facebookButton" destination="wYy-cS-HVz" id="qqx-Tx-aB9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

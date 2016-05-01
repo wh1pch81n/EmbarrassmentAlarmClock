@@ -12,7 +12,7 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate, EACChi
 	
 	@IBOutlet weak var viewFBButton: UIView!
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
-	var statusBarImageView: UIImageView!
+	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.sharedApplication().statusBarFrame)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -29,9 +29,8 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate, EACChi
 		loginButton.topAnchor.constraintEqualToAnchor(viewFBButton.topAnchor).active = true
 		loginButton.bottomAnchor.constraintEqualToAnchor(viewFBButton.bottomAnchor).active = true
 		
-		statusBarImageView = UIImageView(frame: UIApplication.statusBarView.bounds)
 		view.addSubview(statusBarImageView)
-		statusBarImageView.hidden = false
+		statusBarImageView.hidden = true
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -75,4 +74,8 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate, EACChi
 	//		parentViewController?.presentViewController(viewControllerToPresent, animated: flag, completion: completion)
 	//	}
 	//	
+	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return .LightContent
+	}
 }

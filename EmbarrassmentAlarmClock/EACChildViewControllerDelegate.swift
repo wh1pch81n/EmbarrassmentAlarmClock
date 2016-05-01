@@ -18,7 +18,7 @@ protocol EACChildViewControllerDelegate: class {
 
 protocol EACChildViewControllerProtocol: class {
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate! { get set }
-	var statusBarImageView: UIImageView! { set get }
+	var statusBarImageView: UIImageView { get }
 }
 
 extension EACChildViewControllerDelegate {

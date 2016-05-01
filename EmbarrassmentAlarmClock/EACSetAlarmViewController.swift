@@ -14,7 +14,7 @@ class EACSetAlarmViewController: UIViewController, EACChildViewControllerProtoco
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
 	
 	let chosenDateKey = "chosen_date_key"
-	var statusBarImageView: UIImageView!
+	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.sharedApplication().statusBarFrame)
 	
 	override func loadView() {
 		super.loadView()
@@ -22,9 +22,8 @@ class EACSetAlarmViewController: UIViewController, EACChildViewControllerProtoco
 		let maskShape = CAShapeLayer()
 		maskShape.path = circle.CGPath
 		alarmTimeButton.layer.mask = maskShape
-		statusBarImageView = UIImageView(frame: UIApplication.statusBarView.bounds)
 		view.addSubview(statusBarImageView)
-		statusBarImageView.hidden = true;
+		statusBarImageView.hidden = true
 	}
 	
 	@IBAction func tappedAlarmTimeButton(sender: AnyObject) {
@@ -46,6 +45,10 @@ class EACSetAlarmViewController: UIViewController, EACChildViewControllerProtoco
 				datePicker.setDate(dateObject, animated: true)
 			}
 		}
+	}
+	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return .Default
 	}
 	
 }

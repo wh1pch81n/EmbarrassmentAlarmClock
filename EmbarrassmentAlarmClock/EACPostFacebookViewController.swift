@@ -11,7 +11,7 @@ class EACPostFacebookViewController: UIViewController, EACChildViewControllerPro
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
 	var snoozeAmount = 0
 	@IBOutlet var imageView: UIImageView!
-	var statusBarImageView: UIImageView!
+	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.sharedApplication().statusBarFrame)
 	
 	@IBAction func tappedPostToFacebook(sender: AnyObject) {
 //				let accessToken = FBSDKAccessToken.currentAccessToken()
@@ -28,6 +28,12 @@ class EACPostFacebookViewController: UIViewController, EACChildViewControllerPro
 		submitToFacebook()
 		
 		eacChildViewControllerDelegate.transitionToNextVC(self)
+	}
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		view.addSubview(statusBarImageView)
+		statusBarImageView.hidden = true
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -88,6 +94,10 @@ class EACPostFacebookViewController: UIViewController, EACChildViewControllerPro
 //			dialog.mode = FBSDKShareDialogMode.FeedBrowser
 //		}
 //		dialog.show()
+	}
+	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return .LightContent
 	}
 	
 }

@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
 		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+		
+		//UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(
+			//UIApplicationBackgroundFetchIntervalMinimum)
 		return true
 	}
 	
@@ -47,6 +50,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
 
-
+//	func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+//		
+//		EACAudioManager.sharedInstance.playSong()
+//		EACAudioManager.AudioPlayerManager.sharedInstance.repeats = 3
+//		EACAudioManager.AudioPlayerManager.sharedInstance.stoppedPlaying = { (becauseAutoSnooze: Bool) -> () in
+//			NSUserDefaults.standardUserDefaults().setObject(NSDate(), forKey: "performFetchWithCompletionHandler")
+//			completionHandler(UIBackgroundFetchResult.NewData)
+//		}
+//	}
+	
 }
 

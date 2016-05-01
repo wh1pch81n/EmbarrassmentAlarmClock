@@ -18,6 +18,7 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 
 	@IBOutlet weak var contentView: UIView!
 	@IBOutlet weak var containerViewButtons: UIView!
+	@IBOutlet weak var facebookButton: UIImageView!
 	
 	/**Returns a UIViewController if there is some presets that user needs to do before the app will work properly*/
 	var presetViewController: UIViewController? {
@@ -81,18 +82,18 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
-		let d =  NSUserDefaults.standardUserDefaults()
-			.objectForKey("performFetchWithCompletionHandler") as? NSDate
-		let df = NSDateFormatter()
-		df.dateStyle = .MediumStyle
-		df.timeStyle = .MediumStyle
-		let alert = UIAlertView(
-			title: d != nil ? df.stringFromDate(d!) : ("not set"),
-			message: nil,
-			delegate: nil,
-			cancelButtonTitle: "ok"
-		)
-		alert.show()
+//		let d =  NSUserDefaults.standardUserDefaults()
+//			.objectForKey("performFetchWithCompletionHandler") as? NSDate
+//		let df = NSDateFormatter()
+//		df.dateStyle = .MediumStyle
+//		df.timeStyle = .MediumStyle
+//		let alert = UIAlertView(
+//			title: d != nil ? df.stringFromDate(d!) : ("not set"),
+//			message: nil,
+//			delegate: nil,
+//			cancelButtonTitle: "ok"
+//		)
+//		alert.show()
 	}
 	
 	func transitionFromViewController(fromViewController: UIViewController, toViewController: UIViewController, animation: ((UIViewControllerAnimatedTransitioning) -> ())? = nil) {
@@ -100,79 +101,30 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 		let context = EACContextTransitioning(fromVC: self.currentChildViewController, toVC: toViewController, contentView: self.contentView)
 		let toVCEAC = toViewController as? EACChildViewControllerProtocol
 		let fromVCEAC = fromViewController as? EACChildViewControllerProtocol
-		fromVCEAC?.statusBarImageView?.hidden = false
-		toVCEAC?.statusBarImageView?.hidden = false
-		
-		if case let (loginView?, setAlarm?) = ((fromViewController as? EACLoginViewController)?.statusBarImageView,
-		                                       (toViewController as? EACSetAlarmViewController)?.statusBarImageView) {
-			loginView.image = lightContentStatusBarImage
-			setAlarm.image = darkContentStatusBarImage
-		} else if case let (setAlarm?, loginView?) = ((fromViewController as? EACSetAlarmViewController)?.statusBarImageView,
-		                                              (toViewController as? EACLoginViewController)?.statusBarImageView) {
-			setAlarm.image = darkContentStatusBarImage
-			loginView.image = lightContentStatusBarImage
-		}
-		else if case let (loginView?, start?) = ((fromViewController as? EACLoginViewController)?.statusBarImageView,
-		                                              (toViewController as? EACStartAlarmViewController)?.statusBarImageView) {
-			loginView.image = darkContentStatusBarImage
-			start.image = darkContentStatusBarImage
-		} else if case let (start?, loginView?) = ((fromViewController as? EACStartAlarmViewController)?.statusBarImageView,
-		                                              (toViewController as? EACLoginViewController)?.statusBarImageView) {
-			start.image = darkContentStatusBarImage
-			loginView.image = darkContentStatusBarImage
-		}
-		else if case let (loginView?, active?) = ((fromViewController as? EACActiveAlarmViewController)?.statusBarImageView,
-		                                              (toViewController as? EACSetAlarmViewController)?.statusBarImageView) {
-			loginView.image = darkContentStatusBarImage
-			active.image = darkContentStatusBarImage
-		} else if case let (active?, loginView?) = ((fromViewController as? EACActiveAlarmViewController)?.statusBarImageView,
-		                                              (toViewController as? EACLoginViewController)?.statusBarImageView) {
-			active.image = darkContentStatusBarImage
-			loginView.image = darkContentStatusBarImage
-		}
-		else if case let (start?, setAlarm?) = ((fromViewController as? EACStartAlarmViewController)?.statusBarImageView,
-		                                       (toViewController as? EACSetAlarmViewController)?.statusBarImageView) {
-			start.image = lightContentStatusBarImage
-			setAlarm.image = darkContentStatusBarImage
-		} else if case let (setAlarm?, start?) = ((fromViewController as? EACSetAlarmViewController)?.statusBarImageView,
-		                                              (toViewController as? EACStartAlarmViewController)?.statusBarImageView) {
-			setAlarm.image = darkContentStatusBarImage
-			start.image = lightContentStatusBarImage
-		}
-		else if case let (active?, setAlarm?) = ((fromViewController as? EACActiveAlarmViewController)?.statusBarImageView,
-		                                        (toViewController as? EACSetAlarmViewController)?.statusBarImageView) {
-			active.image = darkContentStatusBarImage
-			setAlarm.image = lightContentStatusBarImage
-		} else if case let (setAlarm?, active?) = ((fromViewController as? EACSetAlarmViewController)?.statusBarImageView,
-		                                          (toViewController as? EACActiveAlarmViewController)?.statusBarImageView) {
-			setAlarm.image = lightContentStatusBarImage
-			active.image = darkContentStatusBarImage
-		}
-		else if case let (active?, post?) = ((fromViewController as? EACActiveAlarmViewController)?.statusBarImageView,
-		                                         (toViewController as? EACPostFacebookViewController)?.statusBarImageView) {
-			active.image = darkContentStatusBarImage
-			post.image = darkContentStatusBarImage
-		} else if case let (post?, active?) = ((fromViewController as? EACPostFacebookViewController)?.statusBarImageView,
-		                                           (toViewController as? EACActiveAlarmViewController)?.statusBarImageView) {
-			post.image = darkContentStatusBarImage
-			active.image = darkContentStatusBarImage
-		}
+		fromVCEAC?.statusBarImageView.hidden = false
+		toVCEAC?.statusBarImageView.hidden = false
+		fromVCEAC?.statusBarImageView.image = (fromViewController.preferredStatusBarStyle() == .LightContent) ? lightContentStatusBarImage : darkContentStatusBarImage
+		toVCEAC?.statusBarImageView.image = (toViewController.preferredStatusBarStyle() == .LightContent) ? lightContentStatusBarImage : darkContentStatusBarImage
 		
 		self.previousChildViewController = self.currentChildViewController
 		self.currentChildViewController = toViewController
 		self.addChildViewController(toViewController)
-		let animator = EACCircleAnimator(isPresenting: true)
+		let animator = EACCircleAnimator(isPresenting: !true)
 		context.animatorDelegate = animator
-		UIApplication.statusBarView.hidden = true
+		UIApplication.sharedApplication().statusBarHidden = true
+		self.setNeedsStatusBarAppearanceUpdate()
 		animation?(animator)
 		self.view.userInteractionEnabled = false
 		animator.animateTransition(context)
 		toViewController.didMoveToParentViewController(self)
 		animator.didFinishAnimation = {
-			fromVCEAC?.statusBarImageView?.hidden = true
-			toVCEAC?.statusBarImageView?.hidden = true
-			UIApplication.statusBarView.hidden = false
-			self.view.userInteractionEnabled = true
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC)), dispatch_get_main_queue(), {
+				UIApplication.sharedApplication().statusBarHidden = false
+				self.setNeedsStatusBarAppearanceUpdate()
+				fromVCEAC?.statusBarImageView.hidden = true
+				toVCEAC?.statusBarImageView.hidden = true
+				self.view.userInteractionEnabled = true
+			})
 		}
 	}
 	
@@ -180,14 +132,27 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 	@IBAction func tappedFacebookButton(sender: UITapGestureRecognizer) {
 		//facebookLoginVC.transitioningDelegate = EACCircleAnimatorManager.sharedInstance
 		//presentViewController(facebookLoginVC, animated: true, completion: nil)
-				let nextVC: UIViewController
+		let nextVC: UIViewController
+		var animator: (animator: UIViewControllerAnimatedTransitioning) -> ()
 		if self.currentChildViewController == facebookLoginVC {
 			// dismiss
 			nextVC = self.previousChildViewController!
+			animator = { (animator: UIViewControllerAnimatedTransitioning) -> () in
+				if let _animator = animator as? EACCircleAnimator {
+					_animator.centerPoint = self.facebookButton.center
+					_animator.isPresenting = false
+				}
+			}
 		} else {
 			nextVC = facebookLoginVC
+			animator = { (animator: UIViewControllerAnimatedTransitioning) -> () in
+				if let _animator = animator as? EACCircleAnimator {
+					_animator.centerPoint = self.facebookButton.center
+					_animator.isPresenting = true
+				}
+			}
 		}
-		transitionFromViewController(currentChildViewController, toViewController: nextVC)
+		transitionFromViewController(currentChildViewController, toViewController: nextVC, animation: animator)
 	}
 	
 	// MARK: EACChildViewControllerDelegate 
@@ -195,41 +160,47 @@ class ViewController: UIViewController, EACChildViewControllerDelegate {
 		let nextVC: UIViewController!
 		var animator: ((animator: UIViewControllerAnimatedTransitioning) -> ())? = nil
 		
-		let animatorEACCircle = { (centerPoint: CGPoint) -> (animator: UIViewControllerAnimatedTransitioning) -> () in
+		let animatorEACCircle = { (centerPoint: CGPoint, outwardAnimation: Bool) -> (animator: UIViewControllerAnimatedTransitioning) -> () in
 			return { (animator: UIViewControllerAnimatedTransitioning) -> () in
 				if let _animator = animator as? EACCircleAnimator {
 					_animator.centerPoint = centerPoint
+					_animator.isPresenting = true
 				}
 			}
 		}
 		
 		switch sender {
 		case facebookLoginVC:
+			animator = animatorEACCircle(facebookButton.center, true)
 			if let setUpVC = presetViewController {
 				nextVC = setUpVC
 			} else if let prevVC = self.previousChildViewController {
 				nextVC = prevVC
 			} else {
 				nextVC = startAlarmVC
+				startAlarmVC.view.hidden = false
+				animator = animatorEACCircle(startAlarmVC.startButton.center, false)
 			}
 		case startAlarmVC:
 			nextVC = setAlarmVC
-			animator = animatorEACCircle(startAlarmVC.startButton.center)
+			animator = animatorEACCircle(startAlarmVC.startButton.center, true)
+			
 		case setAlarmVC:
 			nextVC = activeAlarmVC
-			animator = animatorEACCircle(setAlarmVC.alarmTimeButton.center)
+			animator = animatorEACCircle(setAlarmVC.alarmTimeButton.center, true)
 		case activeAlarmVC:
 			switch EACAlarmManager.sharedInstance.alarmState {
 			case .Ringing, .Snooze:
 				postFacebookVC.snoozeAmount = EACAlarmManager.sharedInstance.numOfSnoozes()
 				nextVC = postFacebookVC
+				animator = animatorEACCircle(CGPoint(x: activeAlarmVC.view.frame.midX, y: activeAlarmVC.view.frame.maxY), true)
 			default:
 				nextVC = startAlarmVC
+				animator = animatorEACCircle(CGPoint(x: activeAlarmVC.view.frame.midX, y: activeAlarmVC.view.frame.maxY), false)
 			}
-			animator = animatorEACCircle(CGPoint(x: activeAlarmVC.view.frame.midX, y: activeAlarmVC.view.frame.maxY))
 		case postFacebookVC:
 			nextVC = startAlarmVC
-			animator = animatorEACCircle(CGPoint(x: activeAlarmVC.view.frame.minX, y: activeAlarmVC.view.frame.maxY))
+			animator = animatorEACCircle(CGPoint(x: activeAlarmVC.view.frame.minX, y: activeAlarmVC.view.frame.maxY), false)
 		default:
 			return
 		}

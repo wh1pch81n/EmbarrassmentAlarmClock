@@ -12,7 +12,7 @@ class EACStartAlarmViewController: UIViewController, EACChildViewControllerProto
 	
 	@IBOutlet weak var startButton: UIButton!
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
-	var statusBarImageView: UIImageView!
+	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.sharedApplication().statusBarFrame)
 	
 	override func loadView() {
 		super.loadView()
@@ -20,6 +20,8 @@ class EACStartAlarmViewController: UIViewController, EACChildViewControllerProto
 		let maskShape = CAShapeLayer()
 		maskShape.path = circle.CGPath
 		startButton.layer.mask = maskShape
+		view.addSubview(statusBarImageView)
+		statusBarImageView.hidden = true
 	}
 	
 	@IBAction func tappedStartButton(sender: AnyObject) {
@@ -29,6 +31,10 @@ class EACStartAlarmViewController: UIViewController, EACChildViewControllerProto
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		eacChildViewControllerDelegate.hideButtonBar(false)
+	}
+	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return .LightContent
 	}
 	
 }
