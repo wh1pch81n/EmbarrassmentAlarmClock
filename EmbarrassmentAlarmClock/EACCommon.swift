@@ -17,30 +17,30 @@ let POST = "POST"
 enum ImageAsset: String {
 	case Facebook_F_icon = "Facebook-F-icon"
 	
-	func image(bundle: NSBundle = NSBundle.mainBundle()) -> UIImage {
-		return UIImage(named: self.rawValue, inBundle: bundle, compatibleWithTraitCollection: nil)!
+	func image(_ bundle: Bundle = Bundle.main) -> UIImage {
+		return UIImage(named: self.rawValue, in: bundle, compatibleWith: nil)!
 	}
 }
 
-func viewControllerFromType<T>(vc: T.Type) -> T {
-	return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(String(vc)) as! T
+func viewControllerFromType<T>(_ vc: T.Type) -> T {
+	return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: vc)) as! T
 }
 
-func constrainSubview(view: UIView, toSuperView superView: UIView) {
+func constrainSubview(_ view: UIView, toSuperView superView: UIView) {
 	view.translatesAutoresizingMaskIntoConstraints = false
-	view.topAnchor.constraintEqualToAnchor(superView.topAnchor).active = true
-	view.bottomAnchor.constraintEqualToAnchor(superView.bottomAnchor).active = true
-	view.leadingAnchor.constraintEqualToAnchor(superView.leadingAnchor).active = true
-	view.trailingAnchor.constraintEqualToAnchor(superView.trailingAnchor).active = true
+	view.topAnchor.constraint(equalTo: superView.topAnchor).isActive = true
+	view.bottomAnchor.constraint(equalTo: superView.bottomAnchor).isActive = true
+	view.leadingAnchor.constraint(equalTo: superView.leadingAnchor).isActive = true
+	view.trailingAnchor.constraint(equalTo: superView.trailingAnchor).isActive = true
 }
 
 extension UIView {
 	func viewToImage() -> UIImage {
 		var viewImage: UIImage
-		UIGraphicsBeginImageContextWithOptions(bounds.size, opaque, 0.0)
-		layer.renderInContext(UIGraphicsGetCurrentContext()!)
+		UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0.0)
+		layer.render(in: UIGraphicsGetCurrentContext()!)
 		
-		viewImage = UIGraphicsGetImageFromCurrentImageContext()
+		viewImage = UIGraphicsGetImageFromCurrentImageContext()!
 		UIGraphicsEndImageContext()
 		
 		return viewImage
@@ -48,7 +48,7 @@ extension UIView {
 }
 
 extension CGPoint {
-	func distance(p: CGPoint) -> CGFloat {
+	func distance(_ p: CGPoint) -> CGFloat {
 		return sqrt(pow(self.x - p.x, 2) + pow(self.y - p.y, 2))
 	}
 }
@@ -63,7 +63,7 @@ extension UIApplication {
 //			}
 //			return nil;
 //		}
-	return UIApplication.sharedApplication().valueForKey("statusBarWindow")!.subviews[0]
+	return (UIApplication.shared.value(forKey: "statusBarWindow")! as AnyObject).subviews[0]
 	}
 }
 

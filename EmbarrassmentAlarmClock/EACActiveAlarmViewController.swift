@@ -13,46 +13,46 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewControllerProt
 	
 	@IBOutlet weak var alarmSetLabel: UILabel!
 	@IBOutlet weak var snoozeCount: UIButton!
-	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.sharedApplication().statusBarFrame)
+	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.shared.statusBarFrame)
 
 	
 	override func loadView() {
 		super.loadView()
-		let circle = UIBezierPath(ovalInRect: snoozeCount.bounds)
+		let circle = UIBezierPath(ovalIn: snoozeCount.bounds)
 		let maskShape = CAShapeLayer()
-		maskShape.path = circle.CGPath
+		maskShape.path = circle.cgPath
 		snoozeCount.layer.mask = maskShape
 		
 		self.view.addGestureRecognizer({
 			let g = UISwipeGestureRecognizer(target: self, action: #selector(EACActiveAlarmViewController.stopAlarm(_:)))
-			g.direction = UISwipeGestureRecognizerDirection.Right
+			g.direction = UISwipeGestureRecognizerDirection.right
 			return g
 			}())
-		view.userInteractionEnabled = true
+		view.isUserInteractionEnabled = true
 		view.addSubview(statusBarImageView)
-		statusBarImageView.hidden = true
+		statusBarImageView.isHidden = true
 	}
 	
-	func alarmStateDidChange(alarmState: EACAlarmState) {
+	func alarmStateDidChange(_ alarmState: EACAlarmState) {
 		updateSnoozeButton()
 	}
 	
 	func updateSnoozeButton() {
 		switch EACAlarmManager.sharedInstance.alarmState {
-		case .Initial:
-			snoozeCount.setTitle("Won't ring", forState: UIControlState.Normal)
-		case .Armed:
-			snoozeCount.setTitle("Disable Alarm", forState: UIControlState.Normal)
-		case .Ringing:
-			snoozeCount.setTitle("Snooze Me!", forState: UIControlState.Normal)
-		case .Snooze:
+		case .initial:
+			snoozeCount.setTitle("Won't ring", for: UIControlState())
+		case .armed:
+			snoozeCount.setTitle("Disable Alarm", for: UIControlState())
+		case .ringing:
+			snoozeCount.setTitle("Snooze Me!", for: UIControlState())
+		case .snooze:
 			let numSnoozes = EACAlarmManager.sharedInstance.numOfSnoozes()
 			let text = numSnoozes == 1 ? "\(numSnoozes)\nSnooze": "\(numSnoozes)\nSnoozes"
-			snoozeCount.setTitle(text, forState: UIControlState.Normal)
+			snoozeCount.setTitle(text, for: UIControlState())
 		}
 		snoozeCount.titleLabel!.numberOfLines = 0
 		snoozeCount.titleLabel!.setNeedsLayout()
-		snoozeCount.titleLabel!.textAlignment = NSTextAlignment.Center
+		snoozeCount.titleLabel!.textAlignment = NSTextAlignment.center
 	}
 	
 	override func viewDidLoad() {
@@ -60,40 +60,40 @@ class EACActiveAlarmViewController: UIViewController, EACChildViewControllerProt
 		updateSnoozeButton()
 		EACAlarmManager.sharedInstance.eacAlarmManagerDelegate = self
 		
-		NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidBecomeActiveNotification, object: nil, queue: nil) { (n: NSNotification) -> Void in
+		NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { (n: Notification) -> Void in
 			self.updateSnoozeButton()
 		}
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		eacChildViewControllerDelegate.hideButtonBar(false)
-		let dateFormatter = NSDateFormatter()
+		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "hh:mm a"
-		alarmSetLabel.text = dateFormatter.stringFromDate(EACAlarmManager.sharedInstance.alarmFireDate!)
+		alarmSetLabel.text = dateFormatter.string(from: EACAlarmManager.sharedInstance.alarmFireDate!)
 		
 		updateSnoozeButton()
 	}
 	
-	@IBAction func tappedSnooze(sender: AnyObject) {
+	@IBAction func tappedSnooze(_ sender: AnyObject) {
 		switch EACAlarmManager.sharedInstance.alarmState {
-		case .Initial: fallthrough
-		case .Armed:
+		case .initial: fallthrough
+		case .armed:
 			stopAlarm(self)
-		case .Ringing:
+		case .ringing:
 			EACAlarmManager.sharedInstance.snoozeAlarm()
-		case .Snooze:
+		case .snooze:
 			() // Probably add some useless animation
 		}
 	}
 	
-	@IBAction func stopAlarm(sender: AnyObject) {
+	@IBAction func stopAlarm(_ sender: AnyObject) {
 		eacChildViewControllerDelegate.transitionToNextVC(self)
 		EACAlarmManager.sharedInstance.stopAlarm()
 	}
 	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return .LightContent
+	override var preferredStatusBarStyle : UIStatusBarStyle {
+		return .lightContent
 	}
 	
 }

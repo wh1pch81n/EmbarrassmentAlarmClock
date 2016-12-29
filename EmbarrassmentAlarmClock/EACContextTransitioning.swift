@@ -30,27 +30,27 @@ class EACContextTransitioning: NSObject, UIViewControllerContextTransitioning {
 		toVC.view.bounds = contentView.bounds
 	}
 	
-	func containerView() -> UIView? {
+	var containerView: UIView {
 		return contentView
 	}
 	
-	func isAnimated() -> Bool {
+	var isAnimated: Bool {
 		return true
 	}
 	
-	func isInteractive() -> Bool {
+	var isInteractive: Bool {
 		return false
 	}
 	
-	func transitionWasCancelled() -> Bool {
+	var transitionWasCancelled: Bool {
 		return false
 	}
 	
-	func presentationStyle() -> UIModalPresentationStyle {
-		return UIModalPresentationStyle.FullScreen
+	var presentationStyle: UIModalPresentationStyle {
+		return UIModalPresentationStyle.fullScreen
 	}
 	
-	func updateInteractiveTransition(percentComplete: CGFloat) {
+	func updateInteractiveTransition(_ percentComplete: CGFloat) {
 		
 	}
 	
@@ -62,7 +62,7 @@ class EACContextTransitioning: NSObject, UIViewControllerContextTransitioning {
 		
 	}
 	
-	func completeTransition(didComplete: Bool) {
+	func completeTransition(_ didComplete: Bool) {
 		contentView.subviews
 			.filter({ $0 != toVC.view })
 			.forEach({ $0.removeFromSuperview() })
@@ -70,38 +70,42 @@ class EACContextTransitioning: NSObject, UIViewControllerContextTransitioning {
 		animatorDelegate?.animationEnded?(true)
 	}
 	
-	func viewControllerForKey(key: String) -> UIViewController? {
+	func viewController(forKey key: UITransitionContextViewControllerKey) -> UIViewController? {
 		switch key {
-		case UITransitionContextToViewControllerKey:
+		case UITransitionContextViewControllerKey.to:
 			return toVC
-		case UITransitionContextFromViewControllerKey:
+		case UITransitionContextViewControllerKey.from:
 			return fromVC
 		default:
 			return nil
 		}
 	}
 	
-	func viewForKey(key: String) -> UIView? {
+	func view(forKey key: UITransitionContextViewKey) -> UIView? {
 		switch key {
-		case UITransitionContextToViewKey:
+		case UITransitionContextViewKey.to:
 			return toVC.view
-		case UITransitionContextFromViewKey:
+		case UITransitionContextViewKey.from:
 			return fromVC.view
 		default:
 			return nil
 		}
 	}
 	
-	func targetTransform() -> CGAffineTransform {
+	var targetTransform: CGAffineTransform {
 		return CGAffineTransform()
 	}
 	
-	func initialFrameForViewController(vc: UIViewController) -> CGRect {
+	func initialFrame(for vc: UIViewController) -> CGRect {
 		return contentView.bounds
 	}
 	
-	func finalFrameForViewController(vc: UIViewController) -> CGRect {
+	func finalFrame(for vc: UIViewController) -> CGRect {
 		return contentView.bounds
+	}
+	
+	func pauseInteractiveTransition() {
+		
 	}
 	
 }

@@ -12,7 +12,7 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate, EACChi
 	
 	@IBOutlet weak var viewFBButton: UIView!
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
-	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.sharedApplication().statusBarFrame)
+	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.shared.statusBarFrame)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -24,22 +24,22 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate, EACChi
 		]
 		self.viewFBButton.addSubview(loginButton)
 		loginButton.translatesAutoresizingMaskIntoConstraints = false
-		loginButton.leftAnchor.constraintEqualToAnchor(viewFBButton.leftAnchor).active = true
-		loginButton.rightAnchor.constraintEqualToAnchor(viewFBButton.rightAnchor).active = true
-		loginButton.topAnchor.constraintEqualToAnchor(viewFBButton.topAnchor).active = true
-		loginButton.bottomAnchor.constraintEqualToAnchor(viewFBButton.bottomAnchor).active = true
+		loginButton.leftAnchor.constraint(equalTo: viewFBButton.leftAnchor).isActive = true
+		loginButton.rightAnchor.constraint(equalTo: viewFBButton.rightAnchor).isActive = true
+		loginButton.topAnchor.constraint(equalTo: viewFBButton.topAnchor).isActive = true
+		loginButton.bottomAnchor.constraint(equalTo: viewFBButton.bottomAnchor).isActive = true
 		
 		view.addSubview(statusBarImageView)
-		statusBarImageView.hidden = true
+		statusBarImageView.isHidden = true
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		let accessToken = FBSDKAccessToken.currentAccessToken()
+		let accessToken = FBSDKAccessToken.current()
 		eacChildViewControllerDelegate.hideButtonBar(accessToken == nil)
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		//if FBSDKAccessToken.currentAccessToken() != nil {
 		//			//presentingViewController!.transitioningDelegate = EACCircleAnimatorManager.sharedInstance
@@ -49,7 +49,7 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate, EACChi
 		
 	}
 	
-	func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+	func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
 		
 		if let result = result {
 			if result.isCancelled {
@@ -66,8 +66,8 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate, EACChi
 		}
 	}
 	
-	func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-		eacChildViewControllerDelegate.hideButtonBar(FBSDKAccessToken.currentAccessToken() == nil)
+	func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+		eacChildViewControllerDelegate.hideButtonBar(FBSDKAccessToken.current() == nil)
 	}
 	
 	//	override func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
@@ -75,7 +75,7 @@ class EACLoginViewController: UIViewController, FBSDKLoginButtonDelegate, EACChi
 	//	}
 	//	
 	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return .LightContent
+	override var preferredStatusBarStyle : UIStatusBarStyle {
+		return .lightContent
 	}
 }

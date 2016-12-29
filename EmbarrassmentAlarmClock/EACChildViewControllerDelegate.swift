@@ -9,10 +9,10 @@
 import Foundation
 
 protocol EACChildViewControllerDelegate: class {	
-	func transitionToNextVC(sender: UIViewController)
+	func transitionToNextVC(_ sender: UIViewController)
 	
-	func transitionToPrevVC(sender: UIViewController)
-	func hideButtonBar(hide: Bool)
+	func transitionToPrevVC(_ sender: UIViewController)
+	func hideButtonBar(_ hide: Bool)
 	func setNeedsStatusBarAppearanceUpdate()
 }
 
@@ -23,12 +23,12 @@ protocol EACChildViewControllerProtocol: class {
 
 extension EACChildViewControllerDelegate {
 	var lightContentStatusBarImage: UIImage {
-		UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+		UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: false)
 		self.setNeedsStatusBarAppearanceUpdate()
 		return UIApplication.statusBarView.viewToImage()
 	}
 	var darkContentStatusBarImage: UIImage {
-		UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
+		UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.default, animated: false)
 		self.setNeedsStatusBarAppearanceUpdate()
 		return UIApplication.statusBarView.viewToImage()
 	}

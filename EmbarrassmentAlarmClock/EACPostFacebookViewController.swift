@@ -11,9 +11,9 @@ class EACPostFacebookViewController: UIViewController, EACChildViewControllerPro
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
 	var snoozeAmount = 0
 	@IBOutlet var imageView: UIImageView!
-	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.sharedApplication().statusBarFrame)
+	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.shared.statusBarFrame)
 	
-	@IBAction func tappedPostToFacebook(sender: AnyObject) {
+	@IBAction func tappedPostToFacebook(_ sender: AnyObject) {
 //				let accessToken = FBSDKAccessToken.currentAccessToken()
 //					if accessToken.hasGranted(FB_PUBLISH_ACTIONS) {
 //						let req = FBSDKGraphRequest(graphPath: FB_GRAPHPATH_FEED, parameters: [
@@ -33,17 +33,17 @@ class EACPostFacebookViewController: UIViewController, EACChildViewControllerPro
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.addSubview(statusBarImageView)
-		statusBarImageView.hidden = true
+		statusBarImageView.isHidden = true
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		self.imageView.image = generateImage()
 		eacChildViewControllerDelegate.hideButtonBar(true)
 	}
 	
 	func generateImage() -> UIImage {
-		let df = NSDateFormatter()
+		let df = DateFormatter()
 		df.dateFormat = "MMM dd, yyyy @ hh:mm:ss"
 		var message: String = ""
 		switch snoozeAmount {
@@ -59,10 +59,10 @@ class EACPostFacebookViewController: UIViewController, EACChildViewControllerPro
 		
 		let label = UILabel()
 		label.numberOfLines = 0
-		label.textAlignment = NSTextAlignment.Center
+		label.textAlignment = NSTextAlignment.center
 		label.text = message
-		label.backgroundColor = UIColor.blackColor()
-		label.textColor = UIColor.redColor()
+		label.backgroundColor = UIColor.black
+		label.textColor = UIColor.red
 		
 		let size = label.sizeThatFits(CGSize(width: 150, height: 0))
 		label.frame.size = size
@@ -70,20 +70,20 @@ class EACPostFacebookViewController: UIViewController, EACChildViewControllerPro
 		return label.viewToImage()
 	}
 	
-	@IBAction func tappedCancel(sender: AnyObject) {
+	@IBAction func tappedCancel(_ sender: AnyObject) {
 		eacChildViewControllerDelegate.transitionToNextVC(self)
 	}
 	
 	func submitToFacebook() {
 		let photoImage = FBSDKSharePhoto()
 		photoImage.image = self.imageView.image!
-		photoImage.userGenerated = false
+		photoImage.isUserGenerated = false
 		let content = FBSDKSharePhotoContent()
 		content.photos = [photoImage]
 		
 		//		FBSDKShareDialog.showFromViewController(activeAlarmVC.parentViewController, withContent: content, delegate: activeAlarmVC)
 		
-		FBSDKShareAPI.shareWithContent(content, delegate: self)
+		FBSDKShareAPI.share(with: content, delegate: self)
 		
 //		let dialog = FBSDKShareDialog()
 //		dialog.fromViewController = activeAlarmVC.parentViewController
@@ -96,23 +96,23 @@ class EACPostFacebookViewController: UIViewController, EACChildViewControllerPro
 //		dialog.show()
 	}
 	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return .LightContent
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		return .lightContent
 	}
 	
 }
 
 extension EACPostFacebookViewController: FBSDKSharingDelegate {
 	
-	func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+	func sharer(_ sharer: FBSDKSharing!, didCompleteWithResults results: [AnyHashable: Any]!) {
 		
 	}
 	
-	func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
+	func sharer(_ sharer: FBSDKSharing!, didFailWithError error: Error!) {
 		
 	}
 	
-	func sharerDidCancel(sharer: FBSDKSharing!) {
+	func sharerDidCancel(_ sharer: FBSDKSharing!) {
 		
 	}
 	

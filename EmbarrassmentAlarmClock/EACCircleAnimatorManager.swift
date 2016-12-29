@@ -10,7 +10,7 @@ class EACCircleAnimatorManager: NSObject, UIViewControllerTransitioningDelegate 
 	
 	static let sharedInstance = EACCircleAnimatorManager()
 	
-	func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		let animator = EACCircleAnimator(isPresenting: true)
 		
 		if let _ = presenting as? ViewController,
@@ -32,7 +32,7 @@ class EACCircleAnimatorManager: NSObject, UIViewControllerTransitioningDelegate 
 		return animator
 	}
 	
-	func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		let animator = EACCircleAnimator(isPresenting: false)
 		
 		if let _dismissed = dismissed as? EACLoginViewController {

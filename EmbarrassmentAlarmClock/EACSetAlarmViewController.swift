@@ -14,41 +14,41 @@ class EACSetAlarmViewController: UIViewController, EACChildViewControllerProtoco
 	weak var eacChildViewControllerDelegate: EACChildViewControllerDelegate!
 	
 	let chosenDateKey = "chosen_date_key"
-	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.sharedApplication().statusBarFrame)
+	var statusBarImageView: UIImageView = UIImageView(frame: UIApplication.shared.statusBarFrame)
 	
 	override func loadView() {
 		super.loadView()
-		let circle = UIBezierPath(ovalInRect: alarmTimeButton.bounds)
+		let circle = UIBezierPath(ovalIn: alarmTimeButton.bounds)
 		let maskShape = CAShapeLayer()
-		maskShape.path = circle.CGPath
+		maskShape.path = circle.cgPath
 		alarmTimeButton.layer.mask = maskShape
 		view.addSubview(statusBarImageView)
-		statusBarImageView.hidden = true
+		statusBarImageView.isHidden = true
 	}
 	
-	@IBAction func tappedAlarmTimeButton(sender: AnyObject) {
+	@IBAction func tappedAlarmTimeButton(_ sender: AnyObject) {
 		// save the time somewhere
-		EACAlarmManager.sharedInstance.alarmFireDate = datePicker.date
+		EACAlarmManager.sharedInstance.alarmFireDate = datePicker.date 
 		EACAlarmManager.sharedInstance.armAlarm()
 		
-		NSUserDefaults.standardUserDefaults().setObject(datePicker.date, forKey: chosenDateKey)
+		UserDefaults.standard.set(datePicker.date, forKey: chosenDateKey)
 		// transition to next view
 		eacChildViewControllerDelegate.transitionToNextVC(self)
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		eacChildViewControllerDelegate.hideButtonBar(false)
 		
-		if let object = NSUserDefaults.standardUserDefaults().objectForKey(chosenDateKey) {
-			if let dateObject = object as? NSDate {
+		if let object = UserDefaults.standard.object(forKey: chosenDateKey) {
+			if let dateObject = object as? Date {
 				datePicker.setDate(dateObject, animated: true)
 			}
 		}
 	}
 	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return .Default
+	override var preferredStatusBarStyle : UIStatusBarStyle {
+		return .default
 	}
 	
 }
